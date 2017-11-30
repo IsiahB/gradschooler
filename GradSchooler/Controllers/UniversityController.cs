@@ -9,8 +9,10 @@ namespace GradSchooler.Controllers
     public class UniversityController : Controller
     {
         // GET: University
-        public ActionResult Index()
+        public ActionResult University()
         {
+            ViewBag.Message = "Your University Page";
+
             return View();
         }
     }
