@@ -1,0 +1,36 @@
+﻿@{
+    ViewBag.Title = "Account Creation Page";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>@ViewBag.Title - GradSchooler</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <form action="CreateAccountHandler.cshtml">
+        Email*:<br>
+        <input type="text" name="email">
+        <br>
+        Password*:<br>
+        <input type="password" name="password">
+        <br>
+        First name:<br>
+        <input type="text" name="firstname">
+        <br>
+        Last name:<br>
+        <input type="text" name="lastname">
+        <br>
+        Date of Birth(yyyy-mm-dd):<br>
+        <input type="text" name="lastname">
+        <br><br>
+        <input type="submit" value="Create">
+    </form>
+
+    <p>If you click the "Create" button, an account will be created.</p>
+</body>
+</html>
