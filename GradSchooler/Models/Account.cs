@@ -28,8 +28,10 @@ namespace GradSchooler.Models
 
         public void setEmail()
         {
-
+            
         }
+
+       
 
         
 
