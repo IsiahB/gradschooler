@@ -45,9 +45,6 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
-    </Reference>
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -110,6 +107,12 @@
       <Private>True</Private>
       <HintPath>..\packages\Antlr.3.4.1.9004\lib\Antlr3.Runtime.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.CodeDom.Providers.DotNetCompilerPlatform, Version=1.0.5.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.1.0.5\lib\net45\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll</HintPath>
+    </Reference>
+    <Reference Include="MySql.Data">
+      <HintPath>..\packages\MySql.Data.6.10.4\lib\net452\MySql.Data.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json">
@@ -152,6 +155,8 @@
     <Compile Include="Models\University.cs" />
     <Compile Include="Models\Program.cs" />
     <Compile Include="Controllers\ProfileController.cs" />
+    <Compile Include="Database\DBConnector.cs" />
+    <Compile Include="Database\DBUtilities.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
@@ -192,10 +197,21 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\University\University.cshtml" />
     <Content Include="Views\CreateAccount\CreateAccountPage.cshtml" />
+    <None Include="docs\MySqlTransaction.xml" />
+    <None Include="docs\MySqlParameterCollection.xml" />
+    <None Include="docs\MySqlParameter.xml" />
+    <None Include="docs\MySqlHelper.xml" />
+    <None Include="docs\MySqlException.xml" />
+    <None Include="docs\MySqlDataReader.xml" />
+    <None Include="docs\MySqlDataAdapter.xml" />
+    <None Include="docs\MySqlConnectionStringBuilder.xml" />
+    <None Include="docs\MySqlConnection.xml" />
+    <None Include="docs\MySqlCommandBuilder.xml" />
+    <None Include="docs\MySqlCommand.xml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="DBUtilities\" />
+    <Folder Include="Database\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
