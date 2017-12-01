@@ -1,32 +1,11 @@
 ﻿@using System;
 @using GradSchooler.Database;
+@using GradSchooler.DBUtilities;
 @using MySql.Data.MySqlClient;
 
 @{
-
     ViewBag.Title = "Account Creation Page";
-
-    var email = "";
-    var password = "";
-    var firstName = "";
-    var lastName = "";
-    var birthday = "";
-
-    if (IsPost)
-    {
-        email = Request.Form["email"];
-        password = Request.Form["password"];
-        firstName = Request.Form["firstName"];
-        lastName = Request.Form["lastName"];
-        birthday = Request.Form["birthday"];
-
-
-
-        //var db = Database.Open("gradschooler");
-        //DBUtilities db = new DBUtilities();
-        //var insertCommand = "INSERT INTO Account (email, password_clr, password, firstName, lastName, birthday) VALUES(@0, @1, @2, @3, @4, @5)";
-        //db.Execute(insertCommand, email, password, password, firstName, lastName, birthday);
-    }
+    //we need to have the model object here
 }
 
 <!DOCTYPE html>

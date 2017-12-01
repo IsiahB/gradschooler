@@ -17,7 +17,7 @@ namespace GradSchooler.DBUtilities{
         // <summary>
         // constructor -- connects to & opens the database
         // </summary>
-        public DBUtilities()
+        private DBUtilities()
         {
             connector = new DBConnector();
             connector.openDB();

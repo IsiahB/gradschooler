@@ -12,7 +12,10 @@ namespace GradSchooler.Controllers
         public ActionResult University()
         {
             ViewBag.Message = "Your University Page";
-
+            //get info from the database
+            //create model object
+            //return array of model objects
+            //pass model to view -- how contrllers send data to view
             return View();
         }
     }
