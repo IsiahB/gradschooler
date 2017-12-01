@@ -32,7 +32,7 @@ namespace GradSchooler.Controllers
 
                 GradSchooler.DBUtilities.DBUtilities db = GradSchooler.DBUtilities.DBUtilities.Instance;
                 var insertCommand = "INSERT INTO Account (email, password_clr, password, firstName, lastName, birthday) VALUES(@0, @1, @2, @3, @4, @5)";
-                //db.Execute(insertCommand, email, password, password, firstName, lastName, birthday);
+                db.Execute(insertCommand, email, password, password, firstName, lastName, birthday);
             }
             
             return View();
