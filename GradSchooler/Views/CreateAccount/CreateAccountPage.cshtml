@@ -1,5 +1,32 @@
-﻿@{
+﻿@using System;
+@using GradSchooler.Database;
+@using MySql.Data.MySqlClient;
+
+@{
+
     ViewBag.Title = "Account Creation Page";
+
+    var email = "";
+    var password = "";
+    var firstName = "";
+    var lastName = "";
+    var birthday = "";
+
+    if (IsPost)
+    {
+        email = Request.Form["email"];
+        password = Request.Form["password"];
+        firstName = Request.Form["firstName"];
+        lastName = Request.Form["lastName"];
+        birthday = Request.Form["birthday"];
+
+
+
+        //var db = Database.Open("gradschooler");
+        //DBUtilities db = new DBUtilities();
+        //var insertCommand = "INSERT INTO Account (email, password_clr, password, firstName, lastName, birthday) VALUES(@0, @1, @2, @3, @4, @5)";
+        //db.Execute(insertCommand, email, password, password, firstName, lastName, birthday);
+    }
 }
 
 <!DOCTYPE html>
@@ -12,21 +39,21 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <form action="CreateAccountHandler.cshtml">
+    <form method="post">
         Email*:<br>
-        <input type="text" name="email">
+        <input type="text" name="email" value="@Request.Form["email"]">
         <br>
         Password*:<br>
-        <input type="password" name="password">
+        <input type="password" name="password" value="@Request.Form["password"]">
         <br>
         First name:<br>
-        <input type="text" name="firstname">
+        <input type="text" name="firstName" value="@Request.Form["firstName"]">
         <br>
         Last name:<br>
-        <input type="text" name="lastname">
+        <input type="text" name="lastName" value="@Request.Form["lastName"]">
         <br>
         Date of Birth(yyyy-mm-dd):<br>
-        <input type="text" name="lastname">
+        <input type="text" name="birthday" value="@Request.Form["birthday"]">
         <br><br>
         <input type="submit" value="Create">
     </form>
