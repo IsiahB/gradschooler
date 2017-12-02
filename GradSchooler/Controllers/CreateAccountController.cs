@@ -1,41 +1,52 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics.Contracts;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using GradSchooler.DBUtilities;
+using GradSchooler.Models;
 
 namespace GradSchooler.Controllers
 {
     public class CreateAccountController : Controller
     {
-        // GET: Login
+        /// <summary>
+        /// Creates the account form.
+        /// </summary>
+        /// <returns>The account form.</returns>
+        public ActionResult CreateAccountForm()
+        {
+            ViewBag.Title = "Enter Account Info"; 
+            return View();
+        }//end CreateAccountForm
+        
+        /// <summary>
+        /// Creates the account page.
+        /// </summary>
+        /// <returns>The account page.</returns>
         public ActionResult CreateAccountPage()
         {
+           // CreateAccountForm(); // load empty form
             ViewBag.Title = "Account Creation Page";
-
-            var email = "";
-            var password = "";
-            var firstName = "";
-            var lastName = "";
-            var birthday = "";
-
+            //create Account model
+            Account a = new Account();
+            //get user response
             if (Request.HttpMethod == "POST") //print out to make sure if uses all caps
             {
-                email = Request.Form["email"];
-                password = Request.Form["password"];
-                firstName = Request.Form["firstName"];
-                lastName = Request.Form["lastName"];
-                birthday = Request.Form["birthday"];
-
-                //create a Model object -- Account then pass it to database
+                a.email = Request.Form["email"];
+                a.password = Request.Form["password"];
+                a.firstName = Request.Form["firstName"];
+                a.lastName = Request.Form["lastName"];
+                a.birthday = Request.Form["birthday"];
 
                 GradSchooler.DBUtilities.DBUtilities db = GradSchooler.DBUtilities.DBUtilities.Instance;
-                var insertCommand = "INSERT INTO Account (email, password_clr, password, firstName, lastName, birthday) VALUES(@0, @1, @2, @3, @4, @5)";
-                db.Execute(insertCommand, email, password, password, firstName, lastName, birthday);
+
+                //pass Account model object to the database to create the account
+                db.createAccount(a);
             }
-            
             return View();
-        }
-    }
-}
+        }//end CreateAccountPage()
+
+    }//end CreateAccountController
+}//namespace

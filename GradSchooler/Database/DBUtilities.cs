@@ -1,5 +1,6 @@
 ﻿using System;
 using GradSchooler.Database;
+using GradSchooler.Models;
 using MySql.Data.MySqlClient;
 
 namespace GradSchooler.DBUtilities{
@@ -42,23 +43,44 @@ namespace GradSchooler.DBUtilities{
         /// <summary>
         /// Execute the specified insertCommand, email, password1, password2, firstName, lastName and birthday.
         /// </summary>
-        /// <returns>The execute.</returns>
+        /// <returns>Whether or not the account was successfully created.</returns>
         /// <param name="insertCommand">Insert command.</param>
-        /// <param name="email">Email.</param>
-        /// <param name="password1">Password1.</param>
-        /// <param name="password2">Password2.</param>
-        /// <param name="firstName">First name.</param>
-        /// <param name="lastName">Last name.</param>
-        /// <param name="birthday">Birthday.</param>
-        internal void Execute(string insertCommand, string email, string password1, string password2, string firstName, string lastName, string birthday)
+        /// <param name="acnt">Account.</param>
+        public Boolean createAccount(Account acnt)
         {
-            throw new NotImplementedException();
-        }
+            //insert into database
+            string sql = null;
 
-        // <summary>
-        // close database
+            try{
+               
+                sql = "INSERT INTO Account(email, password_clr, password, firstName, lastName, accType, birthday)" +
+                    "VALUES(email=@email, password_clr=@password, password=@email, firstName=@firstName, lastName=@lastName, birthday=@birthday)";
+               
+                MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@email", acnt.email);
+                cmd.Parameters.AddWithValue("@password_clr", acnt.password);
+                cmd.Parameters.AddWithValue("@password", acnt.password);
+                cmd.Parameters.AddWithValue("@firstName", acnt.firstName);
+                cmd.Parameters.AddWithValue("@lastName", acnt.lastName);
+                cmd.Parameters.AddWithValue("@accType", "U");
+                cmd.Parameters.AddWithValue("@birthday", acnt.birthday);
+
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (MySqlException)
+            {
+                Console.Write("Invalid parameters for insertion");
+            }
+            return false;
+        }//end createAccount
+
+        /// <summary>
+        /// close database
         // </summary>
-        public void shutDown(){
+        public void shutDown()
+        {
             conn.Close();
         }//end shutDown
 
