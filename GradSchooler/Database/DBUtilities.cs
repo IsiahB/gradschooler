@@ -44,29 +44,42 @@ namespace GradSchooler.DBUtilities{
         /// Execute the specified insertCommand, email, password1, password2, firstName, lastName and birthday.
         /// </summary>
         /// <returns>Whether or not the account was successfully created.</returns>
-        /// <param name="insertCommand">Insert command.</param>
         /// <param name="acnt">Account.</param>
         public Boolean createAccount(Account acnt)
         {
             //insert into database
             string sql = null;
+            //string sql1 = null;
 
             try{
                
-                sql = "INSERT INTO Account(email, password_clr, password, firstName, lastName, accType, birthday)" +
-                    "VALUES(email=@email, password_clr=@password, password=@email, firstName=@firstName, lastName=@lastName, birthday=@birthday)";
-               
+                //sql1 = "INSERT INTO Account " +
+                    //"VALUES(email=@email, password_clr=@password, password=@password, firstName=@firstName, lastName=@lastName, accType=@accType, birthday=@birthday)";
+
+                sql = "INSERT INTO Account " +
+                    "VALUES ('" + acnt.email + "', '" + acnt.password + "', '" + acnt.password + "', '" + acnt.firstName + "', '" +
+                                      acnt.lastName + "', 'U', '" + acnt.birthday + "')";
+                
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
-                cmd.Parameters.AddWithValue("@email", acnt.email);
-                cmd.Parameters.AddWithValue("@password_clr", acnt.password);
-                cmd.Parameters.AddWithValue("@password", acnt.password);
-                cmd.Parameters.AddWithValue("@firstName", acnt.firstName);
-                cmd.Parameters.AddWithValue("@lastName", acnt.lastName);
-                cmd.Parameters.AddWithValue("@accType", "U");
-                cmd.Parameters.AddWithValue("@birthday", acnt.birthday);
+                Console.Write("@email" + acnt.email + "\n");
+                Console.Write("@password_clr" + acnt.password + "\n");
+                Console.Write("@password" + acnt.password + "\n");
+                Console.Write("@firstName" + acnt.firstName + "\n");
+                Console.Write("@lastName" + acnt.lastName + "\n");
+                Console.Write("@birthday" + acnt.birthday + "\n");
 
+                //cmd.Parameters.AddWithValue("@email", acnt.email);
+                //cmd.Parameters.AddWithValue("@password_clr", acnt.password);
+                //cmd.Parameters.AddWithValue("@password", acnt.password);
+                //cmd.Parameters.AddWithValue("@firstName", acnt.firstName);
+                //cmd.Parameters.AddWithValue("@lastName", acnt.lastName);
+                //cmd.Parameters.AddWithValue("@accType", "U");
+                //cmd.Parameters.AddWithValue("@birthday", acnt.birthday);
+
+                Console.Write("Here" + "\n");
                 cmd.ExecuteNonQuery();
+
                 return true;
             }
             catch (MySqlException)
@@ -78,7 +91,7 @@ namespace GradSchooler.DBUtilities{
 
         /// <summary>
         /// close database
-        // </summary>
+        /// </summary>
         public void shutDown()
         {
             conn.Close();

@@ -32,6 +32,7 @@ namespace GradSchooler.Controllers
             //create Account model
             Account a = new Account();
             //get user response
+            Console.Write(Request.HttpMethod);
             if (Request.HttpMethod == "POST") //print out to make sure if uses all caps
             {
                 a.email = Request.Form["email"];
@@ -44,6 +45,8 @@ namespace GradSchooler.Controllers
 
                 //pass Account model object to the database to create the account
                 db.createAccount(a);
+
+                return View("/Views/Home/Index.cshtml");
             }
             return View();
         }//end CreateAccountPage()
