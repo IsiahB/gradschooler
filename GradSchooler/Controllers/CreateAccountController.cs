@@ -41,7 +41,7 @@ namespace GradSchooler.Controllers
                 a.lastName = Request.Form["lastName"];
                 a.birthday = Request.Form["birthday"];
 
-                GradSchooler.DBUtilities.DBUtilities db = GradSchooler.DBUtilities.DBUtilities.Instance;
+                DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
 
                 //pass Account model object to the database to create the account
                 db.createAccount(a);

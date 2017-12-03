@@ -3,17 +3,11 @@ namespace GradSchooler.Models
 {
     public class University
     {
-        public string Name { get; set; }
-        public string Type { get; set; }
-        public string State { get; set; }
-        public string City { get; set; }
-        public string Environment { get; set; }
+        public string name { get; set; }
+        public string fundingtype { get; set; }
+        public string city { get; set; }
+        public string state { get; set; }
+        public string environment { get; set; }
 
-
-        //Constructor
-        public University()
-        {
-
-        }
     }
 }

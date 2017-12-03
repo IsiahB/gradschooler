@@ -84,10 +84,71 @@ namespace GradSchooler.DBUtilities{
             }
             catch (MySqlException)
             {
-                Console.Write("Invalid parameters for insertion");
+                Console.Write("Invalid parameters for insertion" + "\n");
             }
             return false;
         }//end createAccount
+
+        public University[] displayUniversities(University[] unis)
+        {
+            string sql = null;
+
+            try
+            {
+                MySqlDataReader reader = null;
+
+                sql = "SELECT * " +
+                    "FROM University ";
+
+                MySqlCommand command = new MySqlCommand(sql, conn);
+                reader = command.ExecuteReader();
+                int i = 0;
+                while (reader.Read())
+                {
+                    University u = new University
+                    {
+                        name = (string)reader["name"],
+                        fundingtype = (string)reader["fundingtype"],
+                        city = (string)reader["city"],
+                        state = (string)reader["state"],
+                        environment = (string)reader["environment"]
+                    };
+
+                    unis[i] = u;
+                    i++;   
+                }
+            }
+            catch(MySqlException)
+            {
+                Console.Write("Could not display data properly" + "\n");
+            }
+            return unis;
+
+        }
+
+        public int tableSizes(string tablename)
+        {
+            string sql = null;
+            int size = 0;
+
+            try
+            {
+                sql = "SELECT COUNT(*) " +
+                    "FROM " + tablename;
+
+                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                {
+                    size = Convert.ToInt32(cmd.ExecuteScalar()); 
+                    //ExecuteScalar returns the first column of the first row in the table
+                }
+            }
+            catch (MySqlException)
+            {
+                Console.Write("Table doesn't exist or first letter of table was not capitilized");
+            }
+
+            return size;
+        }
 
         /// <summary>
         /// close database

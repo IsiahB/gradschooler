@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GradSchooler.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -18,6 +19,14 @@ namespace GradSchooler.Controllers
             //return array of model objects
             //pass model to view -- how contrllers send data to view
 
+            
+            
+
+            DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
+            int size = db.tableSizes("University");
+            University[] univs = new University[size];
+            univs = db.displayUniversities(univs);
+            ViewData["unis"] = univs;
 
             return View(); //automatically returns the University View
         }

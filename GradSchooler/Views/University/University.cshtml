@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "University";
+    var unis = ViewBag.unis;
 }
 
 <!DOCTYPE html>
@@ -37,48 +38,16 @@
             <th>State</th>
             <th>Environment</th>
         </tr>
+        @foreach(var item in unis)
+        { 
         <tr>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
+            <td>@item.name</td>
+            <td>@item.fundingtype</td>
+            <td>@item.city</td>
+            <td>@item.state</td>
+            <td>@item.environment</td>
         </tr>
-        <tr>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-        </tr>
-        <tr>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-        </tr>
-        <tr>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-        </tr>
-        <tr>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-        </tr>
-        <tr>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-            <td>Stuff</td>
-        </tr>
+        }
     </table>
 </body>
 </html>
