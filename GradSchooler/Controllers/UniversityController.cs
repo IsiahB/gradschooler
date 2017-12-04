@@ -12,15 +12,7 @@ namespace GradSchooler.Controllers
         // GET: University
         public ActionResult University()
         {
-            ViewBag.Message = "Your University Page";
-
-            //get info from the database
-            //create model object
-            //return array of model objects
-            //pass model to view -- how contrllers send data to view
-
-            
-            
+            ViewBag.Message = "University Page";
 
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
             int size = db.tableSizes("University");

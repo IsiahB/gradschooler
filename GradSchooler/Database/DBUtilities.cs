@@ -92,18 +92,15 @@ namespace GradSchooler.DBUtilities{
         public University[] displayUniversities(University[] unis)
         {
             string sql = null;
-
             try
             {
                 MySqlDataReader reader = null;
-
                 sql = "SELECT * " +
                     "FROM University ";
-
                 MySqlCommand command = new MySqlCommand(sql, conn);
                 reader = command.ExecuteReader();
-                int i = 0;
-                while (reader.Read())
+                int b = 0;
+                while (reader.Read() && b < unis.Length)
                 {
                     University u = new University
                     {
@@ -113,16 +110,53 @@ namespace GradSchooler.DBUtilities{
                         state = (string)reader["state"],
                         environment = (string)reader["environment"]
                     };
-
-                    unis[i] = u;
-                    i++;   
+                    
+                    //Console.Write("b value:" + b + "  ");
+                    unis[b] = u;
+                    //Console.Write("name: " + unis[b].name + "\n");
+                    b++;
                 }
             }
-            catch(MySqlException)
+            catch (MySqlException)
             {
                 Console.Write("Could not display data properly" + "\n");
             }
             return unis;
+        }
+
+        public Program[] displayPrograms(Program[] pros)
+        {
+            string sql = null;
+            try
+            {
+                MySqlDataReader reader = null;
+                sql = "SELECT * " +
+                    "FROM Program ";
+                MySqlCommand command = new MySqlCommand(sql, conn);
+                reader = command.ExecuteReader();
+                int i = 0;
+                while (reader.Read() && i < pros.Length)
+                {
+                    Program p = new Program
+                    {
+                        programname = (string)reader["programname"],
+                        degree = (string)reader["degree"],
+                        acceptancerate = (float)reader["acceptancerate"],
+                        instatetuition = (float)reader["instatetuition"],
+                        outstatetuition = (float)reader["outstatetuition"],
+                        fee = (float)reader["fee"],
+                        deadline = (string)reader["deadline"],
+                        schoolname = (string)reader["schoolname"]
+                    };
+                    pros[i] = p;
+                    i++;
+                }
+            }
+            catch (MySqlException)
+            {
+                Console.Write("Could not display data properly" + "\n");
+            }
+            return pros;
 
         }
 
