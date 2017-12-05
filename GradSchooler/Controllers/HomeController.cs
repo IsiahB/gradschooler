@@ -27,11 +27,5 @@ namespace GradSchooler.Controllers
             return View();
         }
 
-        public ActionResult University()
-        {
-            ViewBag.Message = "Your University Page";
-
-            return View();
-        }
     }
 }

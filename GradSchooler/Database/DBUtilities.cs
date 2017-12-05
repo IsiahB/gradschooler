@@ -98,23 +98,25 @@ namespace GradSchooler.DBUtilities{
                 sql = "SELECT * " +
                     "FROM University ";
                 MySqlCommand command = new MySqlCommand(sql, conn);
-                reader = command.ExecuteReader();
-                int b = 0;
-                while (reader.Read() && b < unis.Length)
+                using (reader = command.ExecuteReader())
                 {
-                    University u = new University
+                    int b = 0;
+                    while (reader.Read() && b < unis.Length)
                     {
-                        name = (string)reader["name"],
-                        fundingtype = (string)reader["fundingtype"],
-                        city = (string)reader["city"],
-                        state = (string)reader["state"],
-                        environment = (string)reader["environment"]
-                    };
-                    
-                    //Console.Write("b value:" + b + "  ");
-                    unis[b] = u;
-                    //Console.Write("name: " + unis[b].name + "\n");
-                    b++;
+                        University u = new University
+                        {
+                            name = (string)reader["name"],
+                            fundingtype = (string)reader["fundingtype"],
+                            city = (string)reader["city"],
+                            state = (string)reader["state"],
+                            environment = (string)reader["environment"]
+                        };
+
+                        //Console.Write("b value:" + b + "  ");
+                        unis[b] = u;
+                        //Console.Write("name: " + unis[b].name + "\n");
+                        b++;
+                    }
                 }
             }
             catch (MySqlException)
@@ -133,23 +135,25 @@ namespace GradSchooler.DBUtilities{
                 sql = "SELECT * " +
                     "FROM Program ";
                 MySqlCommand command = new MySqlCommand(sql, conn);
-                reader = command.ExecuteReader();
-                int i = 0;
-                while (reader.Read() && i < pros.Length)
+                using (reader = command.ExecuteReader())
                 {
-                    Program p = new Program
+                    int i = 0;
+                    while (reader.Read() && i < pros.Length)
                     {
-                        programname = (string)reader["programname"],
-                        degree = (string)reader["degree"],
-                        acceptancerate = (float)reader["acceptancerate"],
-                        instatetuition = (float)reader["instatetuition"],
-                        outstatetuition = (float)reader["outstatetuition"],
-                        fee = (float)reader["fee"],
-                        deadline = (string)reader["deadline"],
-                        schoolname = (string)reader["schoolname"]
-                    };
-                    pros[i] = p;
-                    i++;
+                        Program p = new Program
+                        {
+                            programname = (string)reader["programname"],
+                            degree = (string)reader["degree"],
+                            acceptancerate = (float)reader["acceptancerate"],
+                            instatetuition = (float)reader["instatetuition"],
+                            outstatetuition = (float)reader["outstatetuition"],
+                            fee = (float)reader["fee"],
+                            deadline = (string)reader["deadline"],
+                            schoolname = (string)reader["schoolname"]
+                        };
+                        pros[i] = p;
+                        i++;
+                    }
                 }
             }
             catch (MySqlException)
@@ -176,9 +180,9 @@ namespace GradSchooler.DBUtilities{
                     //ExecuteScalar returns the first column of the first row in the table
                 }
             }
-            catch (MySqlException)
+            catch (MySqlException e)
             {
-                Console.Write("Table doesn't exist or first letter of table was not capitilized");
+                Console.Write(e);
             }
 
             return size;

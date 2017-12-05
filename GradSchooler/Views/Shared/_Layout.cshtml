@@ -28,7 +28,16 @@
                     <li>@Html.ActionLink("GRE", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li> 
                     <li>@Html.ActionLink("CREATE ACCOUNT", "CreateAccountPage", "CreateAccount")</li>
-                    <li>@Html.ActionLink("LOGIN", "Index", "Home")</li> 
+					<li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img class="img-responsive" src="/images/h-perfil.png" alt="LOGIN"> </a> <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
+                            <form method="post" action="@Url.Action("Login", "LoginController")" accept-charset="UTF-8">  
+                                <input style="margin-bottom: 15px;" type="text" placeholder="Email" id="email" name="email">
+                                <input style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password">
+                                <input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign in">
+                                <label style="text-align:center;margin-top:5px">Sign up</label>
+                            </form>
+                        </div>
+                    </li>
                 </ul>
             </div>
         </div>

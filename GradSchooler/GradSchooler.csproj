@@ -158,6 +158,7 @@
     <Compile Include="Controllers\ProfileController.cs" />
     <Compile Include="Database\DBConnector.cs" />
     <Compile Include="Database\DBUtilities.cs" />
+    <Compile Include="Controllers\LoginController.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.css" />
