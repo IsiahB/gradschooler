@@ -1,14 +1,14 @@
 ﻿@{
+    //System.Diagnostics.Debug.WriteLine("HERE!!!!!");
     ViewBag.Title = "About";
-    var testInfo = ViewBag.uninames;
+    //var testInfo = ViewBag.uninames;
+    //var j = ViewBag.k;
+    
 
 }
 <h2>@ViewBag.Title.</h2>
 <h3>@ViewBag.Message</h3>
 
-<p>Use this area to provide additional information. 
-    @foreach (var item in testInfo)
-    {
-            @item.state
-    }   
+<p>Use this area to provide additional information. This is a test:
+   @ViewBag.info
 </p>

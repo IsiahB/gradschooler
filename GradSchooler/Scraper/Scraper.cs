@@ -12,24 +12,33 @@ namespace GradSchooler
     {
         public University[] scrape()
         {
-            University[] un = null;
+            System.Diagnostics.Debug.WriteLine("HERE MTHRFKR!!");
+            University[] un = new University[10000000];
            
-            var url = "https://university.graduateshotline.com/ubystate.html";
+            var url = "https://tipidpc.com/catalog.php?cat=0&sec=s";
             var webGet = new HtmlWeb();
             if (webGet.Load(url) is HtmlDocument document)
             {
-                var nodes = document.DocumentNode.CssSelect("#name b").ToList();
+                System.Diagnostics.Debug.WriteLine("Here 1" + '\n');
+                var nodes = document.DocumentNode.CssSelect("#item-search-results li").ToList();
                 for (var i = 0; i < 50; i++)
                 {
+                    System.Diagnostics.Debug.WriteLine("Here 2" + '\n');
                     un[i] = new University();
                     foreach (var node in nodes)
                     {
-                        un[i].state = node.InnerText;
+                        System.Diagnostics.Debug.WriteLine("Here 3" + '\n');
+                        un[i].state = node.CssSelect("h2 a").Single().InnerText;
 
-                    }
-                }
-            }
+                    }//end foreach
+                }//end outer for
+            }//end if
             return un;
+        }//end scrape
+
+        public int test()
+        {
+            return 1;
         }
     }
 }
