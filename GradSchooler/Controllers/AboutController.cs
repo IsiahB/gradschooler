@@ -18,7 +18,7 @@ namespace GradSchooler.Controllers
         {
             //Scraper s = new Scraper();
             var i = test();
-            var k = 1;
+            //var k = 1;
             //University[] u = scrape();
             //ViewData["uninames"] = u;
             String[] kl = { "1", "2" };

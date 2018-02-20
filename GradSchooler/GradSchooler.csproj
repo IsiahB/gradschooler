@@ -163,11 +163,13 @@
     <Compile Include="Controllers\CreateAccountController.cs" />
     <Compile Include="Controllers\ProgramController.cs" />
     <Compile Include="Controllers\UniversityController.cs" />
+    <Compile Include="Database\CryptoClass.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\About.cs" />
     <Compile Include="Models\Account.cs" />
+    <Compile Include="Models\Login.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Models\University.cs" />
     <Compile Include="Models\Program.cs" />
@@ -228,6 +230,7 @@
     <None Include="docs\MySqlCommandBuilder.xml" />
     <None Include="docs\MySqlCommand.xml" />
     <Content Include="Views\Program\Program.cshtml" />
+    <Content Include="Views\Login\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

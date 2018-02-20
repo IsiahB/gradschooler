@@ -188,6 +188,11 @@ namespace GradSchooler.DBUtilities{
             return size;
         }
 
+        public string GetHashPass()
+        {
+            return "";
+        }
+
         /// <summary>
         /// close database
         /// </summary>
