@@ -13,9 +13,6 @@
 <body>
     @using (Html.BeginForm("Login", "Home", FormMethod.Post))
     {
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(s => s.returnURL)
-
         <h1>Login Functionality In MVC</h1>
         <div>
 
@@ -28,8 +25,6 @@
             @Html.TextBoxFor(s => s.username, new { @placeholder = "Username" })
             <br /> <br />
             @Html.PasswordFor(s => s.password, new { @placeholder = "Password" })
-            <br /> <br />
-            @Html.CheckBoxFor(s => s.isRemember) Remember ME
             <br /> <br />
             <button type="submit">Login</button>
         </div>

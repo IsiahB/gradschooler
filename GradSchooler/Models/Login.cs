@@ -9,7 +9,5 @@ namespace GradSchooler.Models
     {
         public string username { get; set; }
         public string password { get; set; }
-        public string returnURL { get; set; }
-        public bool isRemember { get; set; }
     }
 }

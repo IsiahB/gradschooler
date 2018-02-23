@@ -193,6 +193,31 @@ namespace GradSchooler.DBUtilities{
             return "";
         }
 
+        //method to login
+        public Boolean login(String username, String password)
+        {
+            Boolean valid = false;
+
+            //convert plain text to hash
+            //compute hash from the bytes of text
+            //get hash result after compute it
+            //change it into 2 hexadecimal digits
+            //for each byte
+
+            if (conn != null)
+            {
+                MySqlCommand command = new MySqlCommand();
+                command.CommandText = "select password from Account where username=@USERNAME;";
+                command.Prepare();
+                command.Parameters.AddWithValue("@USERNAME", username);
+                MySqlDataReader reader = command.ExecuteReader();
+                if (reader.Read() && reader["password"].Equals(password))
+                    valid = true;
+            }//if
+
+            return valid;
+        }//login
+
         /// <summary>
         /// close database
         /// </summary>
