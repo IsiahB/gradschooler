@@ -20,6 +20,7 @@ namespace GradSchooler.Controllers
             progs = db.displayPrograms(progs);
             ViewData["programs"] = progs;
 
+
             return View();
         }
     }

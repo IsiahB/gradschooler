@@ -17,12 +17,13 @@ namespace GradSchooler.Controllers
         public ActionResult About()
         {
             //Scraper s = new Scraper();
-            var i = test();
+            var m = test();
             //var k = 1;
             //University[] u = scrape();
             //ViewData["uninames"] = u;
             String[] kl = { "1", "2" };
-            ViewBag.info = "Hello I am here"; 
+            ViewBag.i = m;
+            ViewBag.stuff = "okay yeah";
 
             return View();
         }
