@@ -27,35 +27,33 @@
                     <li>@Html.ActionLink("PROGRAMS", "Program", "Program")</li>
                     <li>@Html.ActionLink("GRE", "Index", "Home")</li>
                     <li>@Html.ActionLink("About", "About", "Home")</li> 
+                    <li>@Html.ActionLink("LOGIN", "Login", "Login") </li>
                     <li>@Html.ActionLink("CREATE ACCOUNT", "CreateAccountPage", "CreateAccount")</li>
-                    
+
                     <!-- DROP DOWN FOR LOGGING IN-->
                     <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> LOGIN</a> 
                         <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
                             <form method="post" action="@Url.Action("Login", "LoginController")" accept-charset="UTF-8">
-                                <!-- <input style="margin-bottom: 15px;" type="text" placeholder="Email" id="email" name="email">-->
+                                <input style="margin-bottom: 15px;" type="text" placeholder="Email" id="email" name="email">
                                 <div class="form-group">
                                     <label for="email">Email</label>
-                                    <!--Html.TextBoxFor(a => a.email, new { class = "form-control", placeholder = "Email", tabindex = 1 })-->
-                                    <!--Html.ValidationMessageFor(a => a.email)-->
+                                  
                                 </div>
-                                    <!--<input style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password">-->
+                                <input style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password">
                                 <div class="form-group">
                                     <label for="password">Password</label>
-                                    <!--Html.PasswordFor(a => a.password, new { class = "form-control", placeholder = "Password", tabindex = 2 })-->
-                                    <!--Html.ValidationMessageFor(a => a.password)-->
                                 </div>
                                     <input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign in">
-</form>
+                            </form>
                             @Html.ActionLink("Sign Up", "CreateAccountPage", "CreateAccount") <!--Karot shows up when left a tag is completed-->
                         </div>
                     </li>
-
                 </ul>
             </div>
         </div>
     </div>
+
     <div class="container body-content">
         @RenderBody()
         <hr />

@@ -194,7 +194,7 @@ namespace GradSchooler.DBUtilities{
         }
 
         //method to login
-        public Boolean login(String username, String password)
+        public Boolean loginChecker(String username, String password)
         {
             Boolean valid = false;
 
@@ -216,7 +216,7 @@ namespace GradSchooler.DBUtilities{
             }//if
 
             return valid;
-        }//login
+        }//loginChecker
 
         /// <summary>
         /// close database
