@@ -13,6 +13,11 @@ namespace GradSchooler.Controllers
 {
     public class LoginController : Controller
     {
+        public ActionResult Login()
+        {
+            return View();
+        }
+
         [HttpPost]
         public ActionResult Login(Account acc)
         {
