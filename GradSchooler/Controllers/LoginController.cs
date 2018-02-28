@@ -13,12 +13,14 @@ namespace GradSchooler.Controllers
 {
     public class LoginController : Controller
     {
+        [Authorize]
         public ActionResult Login()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize]
         public ActionResult Login(Account acc)
         {
             if (ModelState.IsValid)
@@ -27,7 +29,7 @@ namespace GradSchooler.Controllers
                 if (db.loginChecker(acc.email, acc.password))
                 {
                     FormsAuthentication.SetAuthCookie(acc.email, true);
-                    return RedirectToAction("Dashboard", "Admin");
+                    return RedirectToAction("Index", "Home");
                 }
                 else
                 {

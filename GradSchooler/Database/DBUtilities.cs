@@ -3,11 +3,13 @@ using GradSchooler.Database;
 using GradSchooler.Models;
 using MySql.Data.MySqlClient;
 
-namespace GradSchooler.DBUtilities{
+namespace GradSchooler.DBUtilities
+{
     /// <summary>
     /// This class is used to query and update the database
     /// </summary>
-    public class DBUtilities{
+    public class DBUtilities
+    {
 
         private static volatile DBUtilities instance; // Singleton 
         private static object mutex = new Object(); // lock object
@@ -30,10 +32,13 @@ namespace GradSchooler.DBUtilities{
         /// create new instance.
         /// returns instance of class.
         /// </summary>
-        public static DBUtilities Instance {
-            get {
+        public static DBUtilities Instance
+        {
+            get
+            {
                 //get lock & create instance of DBUtilies
-                if(instance == null){
+                if (instance == null)
+                {
                     lock (mutex) instance = new DBUtilities();
                 }
                 return instance;
@@ -51,15 +56,16 @@ namespace GradSchooler.DBUtilities{
             string sql = null;
             //string sql1 = null;
 
-            try{
-               
+            try
+            {
+
                 //sql1 = "INSERT INTO Account " +
-                    //"VALUES(email=@email, password_clr=@password, password=@password, firstName=@firstName, lastName=@lastName, accType=@accType, birthday=@birthday)";
+                //"VALUES(email=@email, password_clr=@password, password=@password, firstName=@firstName, lastName=@lastName, accType=@accType, birthday=@birthday)";
 
                 sql = "INSERT INTO Account " +
                     "VALUES ('" + acnt.email + "', '" + acnt.password + "', '" + acnt.password + "', '" + acnt.firstName + "', '" +
                                       acnt.lastName + "', 'U', '" + acnt.birthday + "')";
-                
+
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
 
                 Console.Write("@email" + acnt.email + "\n");
@@ -176,7 +182,7 @@ namespace GradSchooler.DBUtilities{
 
                 using (MySqlCommand cmd = new MySqlCommand(sql, conn))
                 {
-                    size = Convert.ToInt32(cmd.ExecuteScalar()); 
+                    size = Convert.ToInt32(cmd.ExecuteScalar());
                     //ExecuteScalar returns the first column of the first row in the table
                 }
             }
@@ -194,26 +200,43 @@ namespace GradSchooler.DBUtilities{
         }
 
         //method to login
-        public Boolean loginChecker(String username, String password)
+        public bool loginChecker(String email, String password)
         {
-            Boolean valid = false;
+            bool valid = false;
 
             //convert plain text to hash
             //compute hash from the bytes of text
             //get hash result after compute it
             //change it into 2 hexadecimal digits
             //for each byte
-
-            if (conn != null)
+            try
             {
-                MySqlCommand command = new MySqlCommand();
-                command.CommandText = "select password from Account where username=@USERNAME;";
-                command.Prepare();
-                command.Parameters.AddWithValue("@USERNAME", username);
-                MySqlDataReader reader = command.ExecuteReader();
-                if (reader.Read() && reader["password"].Equals(password))
-                    valid = true;
-            }//if
+                if (conn.State != System.Data.ConnectionState.Open)
+                {
+                    conn.Close(); //just incase it is broken
+                    conn.Open(); //open the database connection
+                }//if
+
+                if (conn != null)
+                {
+                    MySqlCommand command = new MySqlCommand();
+                    command.Connection = conn;
+                    command.CommandText = "select password from Account where email=@email;";
+                    command.Prepare();
+                    command.Parameters.AddWithValue("@email", email);
+                    MySqlDataReader reader = command.ExecuteReader();
+                    if (reader.Read() && reader["password"].Equals(password))
+                        valid = true;
+                }//if
+            }
+            catch (Exception e)
+            {
+
+            }
+            finally
+            {
+                conn.Close();
+            }
 
             return valid;
         }//loginChecker
