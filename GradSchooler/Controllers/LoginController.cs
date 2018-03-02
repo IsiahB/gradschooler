@@ -13,14 +13,14 @@ namespace GradSchooler.Controllers
 {
     public class LoginController : Controller
     {
-        [Authorize]
+        [HttpGet]
         public ActionResult Login()
         {
             return View();
         }
 
+
         [HttpPost]
-        [Authorize]
         public ActionResult Login(Account acc)
         {
             if (ModelState.IsValid)
@@ -28,7 +28,12 @@ namespace GradSchooler.Controllers
                 DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
                 if (db.loginChecker(acc.email, acc.password))
                 {
-                    FormsAuthentication.SetAuthCookie(acc.email, true);
+                    String name = db.getAccFirstName(acc.email);
+                    Debug.WriteLine("user's first name: " + name);
+                    //set the account attribute, firstName, to the user's first name by
+                    //quering the database for the name
+                    //acc.firstName = name; 
+                    FormsAuthentication.SetAuthCookie(name, true);
                     return RedirectToAction("Index", "Home");
                 }
                 else
@@ -37,7 +42,16 @@ namespace GradSchooler.Controllers
                 }//else
             }//if
             return View(acc);
+
+          //  FormsAuthentication.SignOut();
         }//login
+
+        //logout method
+        public ActionResult Logout()
+        {
+            FormsAuthentication.SignOut();
+            return RedirectToAction("Index", "Home");
+        }
 
     }//main controller class end
 }//first bracket end

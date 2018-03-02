@@ -2,6 +2,7 @@
 using GradSchooler.Database;
 using GradSchooler.Models;
 using MySql.Data.MySqlClient;
+using System.Diagnostics;
 
 namespace GradSchooler.DBUtilities
 {
@@ -61,36 +62,41 @@ namespace GradSchooler.DBUtilities
 
                 //sql1 = "INSERT INTO Account " +
                 //"VALUES(email=@email, password_clr=@password, password=@password, firstName=@firstName, lastName=@lastName, accType=@accType, birthday=@birthday)";
+                if (conn.State != System.Data.ConnectionState.Open)
+                {
+                    conn.Close(); //just incase it is broken
+                    conn.Open(); //open the database connection
+                }//if
 
-                sql = "INSERT INTO Account " +
+                if(conn != null)
+                {
+                    sql = "INSERT INTO Account " +
                     "VALUES ('" + acnt.email + "', '" + acnt.password + "', '" + acnt.password + "', '" + acnt.firstName + "', '" +
-                                      acnt.lastName + "', 'U', '" + acnt.birthday + "')";
+                      acnt.lastName + "', 'U', '" + acnt.birthday + "')";
 
-                MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
 
-                Console.Write("@email" + acnt.email + "\n");
-                Console.Write("@password_clr" + acnt.password + "\n");
-                Console.Write("@password" + acnt.password + "\n");
-                Console.Write("@firstName" + acnt.firstName + "\n");
-                Console.Write("@lastName" + acnt.lastName + "\n");
-                Console.Write("@birthday" + acnt.birthday + "\n");
+                    //cmd.Parameters.AddWithValue("@email", acnt.email);
+                    //cmd.Parameters.AddWithValue("@password_clr", acnt.password);
+                    //cmd.Parameters.AddWithValue("@password", acnt.password);
+                    //cmd.Parameters.AddWithValue("@firstName", acnt.firstName);
+                    //cmd.Parameters.AddWithValue("@lastName", acnt.lastName);
+                    //cmd.Parameters.AddWithValue("@accType", "U");
+                    //cmd.Parameters.AddWithValue("@birthday", acnt.birthday);
 
-                //cmd.Parameters.AddWithValue("@email", acnt.email);
-                //cmd.Parameters.AddWithValue("@password_clr", acnt.password);
-                //cmd.Parameters.AddWithValue("@password", acnt.password);
-                //cmd.Parameters.AddWithValue("@firstName", acnt.firstName);
-                //cmd.Parameters.AddWithValue("@lastName", acnt.lastName);
-                //cmd.Parameters.AddWithValue("@accType", "U");
-                //cmd.Parameters.AddWithValue("@birthday", acnt.birthday);
+                    cmd.ExecuteNonQuery();
 
-                Console.Write("Here" + "\n");
-                cmd.ExecuteNonQuery();
+                    return true;
+                }
 
-                return true;
             }
             catch (MySqlException)
             {
                 Console.Write("Invalid parameters for insertion" + "\n");
+            }
+            finally
+            {
+                conn.Close();
             }
             return false;
         }//end createAccount
@@ -100,34 +106,47 @@ namespace GradSchooler.DBUtilities
             string sql = null;
             try
             {
-                MySqlDataReader reader = null;
-                sql = "SELECT * " +
-                    "FROM University ";
-                MySqlCommand command = new MySqlCommand(sql, conn);
-                using (reader = command.ExecuteReader())
+                if (conn.State != System.Data.ConnectionState.Open)
                 {
-                    int b = 0;
-                    while (reader.Read() && b < unis.Length)
-                    {
-                        University u = new University
-                        {
-                            name = (string)reader["name"],
-                            fundingtype = (string)reader["fundingtype"],
-                            city = (string)reader["city"],
-                            state = (string)reader["state"],
-                            environment = (string)reader["environment"]
-                        };
+                    conn.Close(); //just incase it is broken
+                    conn.Open(); //open the database connection
+                }//if
 
-                        //Console.Write("b value:" + b + "  ");
-                        unis[b] = u;
-                        //Console.Write("name: " + unis[b].name + "\n");
-                        b++;
+                if(conn != null)
+                {
+                    MySqlDataReader reader = null;
+                    sql = "SELECT * " +
+                        "FROM University ";
+                    MySqlCommand command = new MySqlCommand(sql, conn);
+                    using (reader = command.ExecuteReader())
+                    {
+                        int b = 0;
+                        while (reader.Read() && b < unis.Length)
+                        {
+                            University u = new University
+                            {
+                                name = (string)reader["name"],
+                                fundingtype = (string)reader["fundingtype"],
+                                city = (string)reader["city"],
+                                state = (string)reader["state"],
+                                environment = (string)reader["environment"]
+                            };
+
+                            //Console.Write("b value:" + b + "  ");
+                            unis[b] = u;
+                            //Console.Write("name: " + unis[b].name + "\n");
+                            b++;
+                        }
                     }
                 }
             }
             catch (MySqlException)
             {
                 Console.Write("Could not display data properly" + "\n");
+            }
+            finally
+            {
+                conn.Close();
             }
             return unis;
         }
@@ -137,34 +156,47 @@ namespace GradSchooler.DBUtilities
             string sql = null;
             try
             {
-                MySqlDataReader reader = null;
-                sql = "SELECT * " +
-                    "FROM Program ";
-                MySqlCommand command = new MySqlCommand(sql, conn);
-                using (reader = command.ExecuteReader())
+                if (conn.State != System.Data.ConnectionState.Open)
                 {
-                    int i = 0;
-                    while (reader.Read() && i < pros.Length)
+                    conn.Close(); //just incase it is broken
+                    conn.Open(); //open the database connection
+                }//if
+
+                if(conn != null)
+                {
+                    MySqlDataReader reader = null;
+                    sql = "SELECT * " +
+                        "FROM Program ";
+                    MySqlCommand command = new MySqlCommand(sql, conn);
+                    using (reader = command.ExecuteReader())
                     {
-                        Program p = new Program
+                        int i = 0;
+                        while (reader.Read() && i < pros.Length)
                         {
-                            programname = (string)reader["programname"],
-                            degree = (string)reader["degree"],
-                            acceptancerate = (float)reader["acceptancerate"],
-                            instatetuition = (float)reader["instatetuition"],
-                            outstatetuition = (float)reader["outstatetuition"],
-                            fee = (float)reader["fee"],
-                            deadline = (string)reader["deadline"],
-                            schoolname = (string)reader["schoolname"]
-                        };
-                        pros[i] = p;
-                        i++;
+                            Program p = new Program
+                            {
+                                programname = (string)reader["programname"],
+                                degree = (string)reader["degree"],
+                                acceptancerate = (float)reader["acceptancerate"],
+                                instatetuition = (float)reader["instatetuition"],
+                                outstatetuition = (float)reader["outstatetuition"],
+                                fee = (float)reader["fee"],
+                                deadline = (string)reader["deadline"],
+                                schoolname = (string)reader["schoolname"]
+                            };
+                            pros[i] = p;
+                            i++;
+                        }
                     }
                 }
             }
             catch (MySqlException)
             {
                 Console.Write("Could not display data properly" + "\n");
+            }
+            finally
+            {
+                conn.Close();
             }
             return pros;
 
@@ -177,26 +209,34 @@ namespace GradSchooler.DBUtilities
 
             try
             {
-                sql = "SELECT COUNT(*) " +
+                if (conn.State != System.Data.ConnectionState.Open)
+                {
+                    conn.Close(); //just incase it is broken
+                    conn.Open(); //open the database connection
+                }//if
+
+                if(conn != null)
+                {
+                    sql = "SELECT COUNT(*) " +
                     "FROM " + tablename;
 
-                using (MySqlCommand cmd = new MySqlCommand(sql, conn))
-                {
-                    size = Convert.ToInt32(cmd.ExecuteScalar());
-                    //ExecuteScalar returns the first column of the first row in the table
-                }
+                    using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                    {
+                        size = Convert.ToInt32(cmd.ExecuteScalar());
+                        //ExecuteScalar returns the first column of the first row in the table
+                    }
+                }  
             }
             catch (MySqlException e)
             {
                 Console.Write(e);
             }
+            finally
+            {
+                conn.Close();
+            }
 
             return size;
-        }
-
-        public string GetHashPass()
-        {
-            return "";
         }
 
         //method to login
@@ -240,6 +280,45 @@ namespace GradSchooler.DBUtilities
 
             return valid;
         }//loginChecker
+
+        public String getAccFirstName(String accEmail)
+        {
+            Debug.WriteLine("passed in accEmail: " + accEmail);
+            string sql = null;
+            String accFirstName = "";
+
+            try
+            {
+                if (conn.State != System.Data.ConnectionState.Open)
+                {
+                    conn.Close(); //just incase it is broken
+                    conn.Open(); //open the database connection
+                }//if
+
+                if (conn != null)
+                {
+                    sql = "SELECT firstName " +
+                    "FROM Account " + 
+                    "WHERE email='" + accEmail + "'";
+
+                    using (MySqlCommand cmd = new MySqlCommand(sql, conn))
+                    {
+                        accFirstName = Convert.ToString(cmd.ExecuteScalar());
+                        //ExecuteScalar returns the first column of the first row in the table
+                    }
+                }
+            }
+            catch (MySqlException e)
+            {
+                Console.Write(e);
+            }
+            finally
+            {
+                conn.Close();
+            }
+
+            return accFirstName;
+        }
 
         /// <summary>
         /// close database
