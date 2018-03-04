@@ -30,24 +30,57 @@
     </style>
 </head>
 <body>
-    <table>
-        <tr>
-            <th>University</th>
-            <th>Funding</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Environment</th>
-        </tr>
-        @foreach(var item in unis)
-        { 
-        <tr>
-            <td>@item.name</td>
-            <td>@item.fundingtype</td>
-            <td>@item.city</td>
-            <td>@item.state</td>
-            <td>@item.environment</td>
-        </tr>
+    @if (Request.IsAuthenticated)
+    {
+        using (Html.BeginForm("University", "University", FormMethod.Post))
+        {
+            <table>
+                <tr>
+                    <th></th>
+                    <th>University</th>
+                    <th>Funding</th>
+                    <th>City</th>
+                    <th>State</th>
+                    <th>Environment</th>
+                </tr>
+                @foreach (var item in unis)
+                {
+                    <tr>
+                        <td><input type="checkbox" name="@item.name" value=@item /></td>
+                        <td>@item.name</td>
+                        <td>@item.fundingtype</td>
+                        <td>@item.city</td>
+                        <td>@item.state</td>
+                        <td>@item.environment</td>
+                    </tr>
+                }
+            </table>
+            <br>
+            <input type="submit" value="Favorite">
         }
-    </table>
+    }
+    else
+    {
+        <table>
+            <tr>
+                <th>University</th>
+                <th>Funding</th>
+                <th>City</th>
+                <th>State</th>
+                <th>Environment</th>
+            </tr>
+            @foreach (var item in unis)
+                {
+                <tr>
+                    <td>@item.name</td>
+                    <td>@item.fundingtype</td>
+                    <td>@item.city</td>
+                    <td>@item.state</td>
+                    <td>@item.environment</td>
+                </tr>
+            }
+        </table>
+    }
+    
 </body>
 </html>

@@ -8,10 +8,12 @@ namespace GradSchooler.Controllers
 {
     public class ProfileController : Controller
     {
-        //[Authorize] //if you are not authorized, it wont let you to the page
-        public ActionResult Index()
+        [Authorize] //if you are not authorized, it wont let you to the page
+        public ActionResult Profile()
         {
-            return View ();
+
+
+            return View();
         }
     }
 }

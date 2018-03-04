@@ -29,7 +29,6 @@ namespace GradSchooler.Controllers
                 if (db.loginChecker(acc.email, acc.password))
                 {
                     String name = db.getAccFirstName(acc.email);
-                    Debug.WriteLine("user's first name: " + name);
                     //set the account attribute, firstName, to the user's first name by
                     //quering the database for the name
                     //acc.firstName = name; 
