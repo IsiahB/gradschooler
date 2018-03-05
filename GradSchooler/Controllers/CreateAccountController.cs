@@ -31,6 +31,7 @@ namespace GradSchooler.Controllers
             ViewBag.Title = "Account Creation Page";
             //create Account model
             Account a = new Account();
+            Profile p = new Profile();
             //get user response
             Console.Write(Request.HttpMethod);
             if (Request.HttpMethod == "POST") //print out to make sure if uses all caps
@@ -41,10 +42,15 @@ namespace GradSchooler.Controllers
                 a.lastName = Request.Form["lastName"];
                 a.birthday = Request.Form["birthday"];
 
+                //empty profile created with account creation
+                p.pEmail = Request.Form["email"];
+                p.favUnis = null;
+                p.deadlines = null;
+
                 DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
 
                 //pass Account model object to the database to create the account
-                db.createAccount(a);
+                db.createAccount(a, p);
 
                 return View("/Views/Home/Index.cshtml");
             }

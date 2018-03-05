@@ -51,11 +51,11 @@ namespace GradSchooler.DBUtilities
         /// </summary>
         /// <returns>Whether or not the account was successfully created.</returns>
         /// <param name="acnt">Account.</param>
-        public Boolean createAccount(Account acnt)
+        public Boolean createAccount(Account acnt, Profile profile)
         {
             //insert into database
             string sql = null;
-            //string sql1 = null;
+            string sqlP = null;
 
             try
             {
@@ -74,17 +74,14 @@ namespace GradSchooler.DBUtilities
                     "VALUES ('" + acnt.email + "', '" + acnt.password + "', '" + acnt.password + "', '" + acnt.firstName + "', '" +
                       acnt.lastName + "', 'U', '" + acnt.birthday + "')";
 
+                    sqlP = "INSERT INTO Profile " +
+                    "VALUES ('" + profile.pEmail + "', " + profile.favUnis + "', " + profile.deadlines + "')";
+
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
+                    MySqlCommand cmd2 = new MySqlCommand(sqlP, conn);
 
-                    //cmd.Parameters.AddWithValue("@email", acnt.email);
-                    //cmd.Parameters.AddWithValue("@password_clr", acnt.password);
-                    //cmd.Parameters.AddWithValue("@password", acnt.password);
-                    //cmd.Parameters.AddWithValue("@firstName", acnt.firstName);
-                    //cmd.Parameters.AddWithValue("@lastName", acnt.lastName);
-                    //cmd.Parameters.AddWithValue("@accType", "U");
-                    //cmd.Parameters.AddWithValue("@birthday", acnt.birthday);
-
-                    cmd.ExecuteNonQuery();
+                    cmd.ExecuteNonQuery(); //to add to account
+                    cmd2.ExecuteNonQuery(); //to add the profile
 
                     return true;
                 }
