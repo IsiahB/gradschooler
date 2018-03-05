@@ -74,7 +74,7 @@ namespace GradSchooler.DBUtilities
                     "VALUES ('" + acnt.email + "', '" + acnt.password + "', '" + acnt.password + "', '" + acnt.firstName + "', '" +
                       acnt.lastName + "', 'U', '" + acnt.birthday + "')";
 
-                    sqlP = "INSERT INTO Profile " +
+                    sqlP = "INSERT INTO FavUniversities " +
                     "VALUES ('" + profile.pEmail + "', " + profile.favUnis + "', " + profile.deadlines + "')";
 
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
@@ -97,6 +97,81 @@ namespace GradSchooler.DBUtilities
             }
             return false;
         }//end createAccount
+
+        public Boolean updateFavUniversity(Profile profile)
+        {
+            //insert into database
+            string sql = null;
+
+            try
+            {
+                if (conn.State != System.Data.ConnectionState.Open)
+                {
+                    conn.Close(); //just incase it is broken
+                    conn.Open(); //open the database connection
+                }//if
+
+                if (conn != null)
+                {
+                    sql = "UPDATE FavUniversities " +
+                    "SET gradschoolname='" + profile.favUnis + "'" +
+                    "WHERE accountname='" + profile.pEmail + "'";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                    cmd.ExecuteNonQuery(); 
+
+                    return true;
+                }
+            }
+            catch (MySqlException)
+            {
+                Console.Write("Invalid parameters for insertion" + "\n");
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }//end deleteFavUniversity
+
+        public Boolean deleteFavUniversity(Profile profile)
+        {
+            //insert into database
+            string sql = null;
+
+            try
+            {
+                if (conn.State != System.Data.ConnectionState.Open)
+                {
+                    conn.Close(); //just incase it is broken
+                    conn.Open(); //open the database connection
+                }//if
+
+                if (conn != null)
+                {
+                    sql = "DELETE FROM FavUniversities " +
+                    "WHERE accountname='" + profile.pEmail + "' AND gradschoolname='" + profile.favUnis + "'";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+            catch (MySqlException)
+            {
+                Console.Write("Invalid parameters for insertion" + "\n");
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }//end addFavUniversity
+
+
 
         public University[] displayUniversities(University[] unis)
         {
