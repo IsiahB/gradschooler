@@ -36,3 +36,27 @@ textarea {
 .navbar-inverse .navbar-nav > li > a {
     color: black;
 }
+
+.jumbotron {
+    padding: 30px;
+    margin-bottom: 30px;
+    font-size: 21px;
+    font-weight: 200;
+    line-height: 2.1428571435;
+    color: black;
+    background-color: pink;
+}
+
+.jumbotron {
+    margin-bottom: 0px;
+    background-image: url(https://thumbs.dreamstime.com/b/owl-cute-owl-watercolor-forest-bird-school-books-illustration-cartoon-bird-background-80666953.jpg);
+    background-attachment: fixed;
+    background-position: 0% 25%;
+    background-size: cover;
+    background-repeat: no-repeat;
+    color: white;
+    /*text-shadow: b 0.9em 0.3em 0.3em*//
+}
+
+
+
