@@ -11,6 +11,7 @@ using System.Diagnostics;
 
 namespace GradSchooler.Controllers
 {
+
     public class LoginController : Controller
     {
         [HttpGet]
@@ -29,10 +30,11 @@ namespace GradSchooler.Controllers
                 if (db.loginChecker(acc.email, acc.password))
                 {
                     String name = db.getAccFirstName(acc.email);
+
                     //set the account attribute, firstName, to the user's first name by
                     //quering the database for the name
                     //acc.firstName = name; 
-                    FormsAuthentication.SetAuthCookie(name, true);
+                    FormsAuthentication.SetAuthCookie(acc.email, true);
                     return RedirectToAction("Index", "Home");
                 }
                 else

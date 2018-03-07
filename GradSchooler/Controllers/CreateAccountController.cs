@@ -50,9 +50,8 @@ namespace GradSchooler.Controllers
                 DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
 
                 //pass Account model object to the database to create the account
-                db.createAccount(a, p);
-
-                return View("/Views/Home/Index.cshtml");
+                db.createAccount(a);
+                return View("/Views/Login/Login.cshtml");
             }
             return View();
         }//end CreateAccountPage()

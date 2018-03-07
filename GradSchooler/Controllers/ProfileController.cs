@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GradSchooler.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -11,8 +12,6 @@ namespace GradSchooler.Controllers
         [Authorize] //if you are not authorized, it wont let you to the page
         public ActionResult Profile()
         {
-
-
             return View();
         }
     }

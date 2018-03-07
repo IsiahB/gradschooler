@@ -26,7 +26,8 @@
                     @if (Request.IsAuthenticated)
                     {
                         <li>Hello! @Html.Encode(User.Identity.Name)</li>
-                        <li>@Html.ActionLink("LOGOUT", "Logout", "Login")</li> 
+                        <li>@Html.ActionLink("LOGOUT", "Logout", "Login")</li>
+                        <li>@Html.ActionLink("PROFILE", "Profile", "Profile")</li>
                         //Html.ActionLink("label name", "ActionResult method, "Controller name")
                     }
                     else

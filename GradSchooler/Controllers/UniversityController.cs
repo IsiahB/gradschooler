@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Security;
 
 namespace GradSchooler.Controllers
 {
@@ -29,11 +30,17 @@ namespace GradSchooler.Controllers
         {
             if (ModelState.IsValid)
             {
+                DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
+
+                String curEmail = User.Identity.Name;//get the email of the person logged in
+                Debug.WriteLine("CURRENT LOGGED IN USER: " + curEmail); //test
+
                 //get post data from request object
                 var favUnisData = this.Request.Form; //get the data from the form
                 for (int i = 0; i < favUnisData.Count; i++)
                 {
                     p.favUnis[i] = favUnisData[i];
+                    db.addFavUniversity(curEmail, p.favUnis[i]); //add favUni to database
                 }
                 return RedirectToAction("Index", "Home");
             }

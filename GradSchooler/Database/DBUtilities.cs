@@ -51,11 +51,10 @@ namespace GradSchooler.DBUtilities
         /// </summary>
         /// <returns>Whether or not the account was successfully created.</returns>
         /// <param name="acnt">Account.</param>
-        public Boolean createAccount(Account acnt, Profile profile)
+        public Boolean createAccount(Account acnt)
         {
             //insert into database
             string sql = null;
-            string sqlP = null;
 
             try
             {
@@ -74,13 +73,47 @@ namespace GradSchooler.DBUtilities
                     "VALUES ('" + acnt.email + "', '" + acnt.password + "', '" + acnt.password + "', '" + acnt.firstName + "', '" +
                       acnt.lastName + "', 'U', '" + acnt.birthday + "')";
 
-                    sqlP = "INSERT INTO FavUniversities " +
-                    "VALUES ('" + profile.pEmail + "', " + profile.favUnis + "', " + profile.deadlines + "')";
-
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
-                    MySqlCommand cmd2 = new MySqlCommand(sqlP, conn);
 
                     cmd.ExecuteNonQuery(); //to add to account
+
+                    return true;
+                }
+
+            }
+            catch (MySqlException)
+            {
+                Console.Write("Invalid parameters for insertion" + "\n");
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }//end createAccount
+
+        public Boolean addFavUniversity(String pEmail, String uni)
+        {
+            //insert into database
+            string sqlP = null;
+
+            try
+            {
+                if (conn.State != System.Data.ConnectionState.Open)
+                {
+                    conn.Close(); //just incase it is broken
+                    conn.Open(); //open the database connection
+                }//if
+
+                if (conn != null)
+                {
+                    sqlP = "INSERT INTO FavUniversities " +
+                    "VALUES ('" + pEmail + "', '" + uni + "')";
+
+                    Debug.WriteLine("the sql statement: " + sqlP); //test
+
+                    MySqlCommand cmd2 = new MySqlCommand(sqlP, conn);
+
                     cmd2.ExecuteNonQuery(); //to add the profile
 
                     return true;
