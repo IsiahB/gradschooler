@@ -150,9 +150,7 @@ namespace GradSchooler.DBUtilities
                 if (conn != null)
                 {
                     sqlP = "INSERT INTO FavUniversities " +
-                    "VALUES ('" + pEmail + "', '" + uni + "')";
-
-                    Debug.WriteLine("the sql statement: " + sqlP); //test
+                    "VALUES ('" + pEmail + "', '" + uni + "')";                  
 
                     MySqlCommand cmd2 = new MySqlCommand(sqlP, conn);
 
