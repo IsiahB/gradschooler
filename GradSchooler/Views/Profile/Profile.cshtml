@@ -1,6 +1,39 @@
 ﻿@{
     ViewBag.Title = "Profile";
+    var favs = ViewBag.favUnis;
 }
 
 <h2>Profile</h2>
+<table>
+    <tr>
+        <th>University</th>
+        <th>Funding</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Environment</th>
+    </tr>
+    @foreach (var item in favs)
+    {
+        <tr>
+            <td>@item.name</td>
+            <td>@item.fundingtype</td>
+            <td>@item.city</td>
+            <td>@item.state</td>
+            <td>@item.environment</td>
+        </tr>
+    }
+</table>
+
+
+<p>
+
+    <button>@Html.ActionLink("DELETE", "Profile", "DeleteProfile")</button>
+
+</p>
+
+
+
+
+
+
 

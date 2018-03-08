@@ -3,6 +3,7 @@ using GradSchooler.Database;
 using GradSchooler.Models;
 using MySql.Data.MySqlClient;
 using System.Diagnostics;
+using System.Collections.Generic;
 
 namespace GradSchooler.DBUtilities
 {
@@ -17,6 +18,8 @@ namespace GradSchooler.DBUtilities
 
         private MySqlConnection conn;
         private DBConnector connector;
+
+        
 
         /// <summary>
         /// constructor -- connects to & opens the database
@@ -67,7 +70,7 @@ namespace GradSchooler.DBUtilities
                     conn.Open(); //open the database connection
                 }//if
 
-                if(conn != null)
+                if (conn != null)
                 {
                     sql = "INSERT INTO Account " +
                     "VALUES ('" + acnt.email + "', '" + acnt.password + "', '" + acnt.password + "', '" + acnt.firstName + "', '" +
@@ -91,6 +94,45 @@ namespace GradSchooler.DBUtilities
             }
             return false;
         }//end createAccount
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public Boolean deleteAccount(String email)
+        {
+            //insert into database
+            string sql = null;
+
+            try
+            {
+                if (conn.State != System.Data.ConnectionState.Open)
+                {
+                    conn.Close(); //just incase it is broken
+                    conn.Open(); //open the database connection
+                }//if
+
+                if (conn != null)
+                {
+                    sql = "DELETE FROM Account " +
+                    "WHERE email='" + email + "'";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+            catch (MySqlException)
+            {
+                Console.Write("Invalid parameters for insertion" + "\n");
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }//end addFavUniversity
 
         public Boolean addFavUniversity(String pEmail, String uni)
         {
@@ -152,7 +194,7 @@ namespace GradSchooler.DBUtilities
 
                     MySqlCommand cmd = new MySqlCommand(sql, conn);
 
-                    cmd.ExecuteNonQuery(); 
+                    cmd.ExecuteNonQuery();
 
                     return true;
                 }
@@ -166,8 +208,11 @@ namespace GradSchooler.DBUtilities
                 conn.Close();
             }
             return false;
-        }//end deleteFavUniversity
+        }//end updateFavUniversity
 
+        /// <summary>
+        /// 
+        /// </summary>
         public Boolean deleteFavUniversity(Profile profile)
         {
             //insert into database
@@ -205,7 +250,65 @@ namespace GradSchooler.DBUtilities
         }//end addFavUniversity
 
 
+        /// <summary>
+        /// 
+        /// </summary>
+        public List<University> getFavUniversities(String email)
+        {
+            //insert into database
+            string sql = null;
+            //create array for faved universities
+            List<University> favUnis = new List<University>();
 
+            try
+            {
+                if (conn.State != System.Data.ConnectionState.Open)
+                {
+                    conn.Close(); //just incase it is broken
+                    conn.Open(); //open the database connection
+                }//if
+
+                if (conn != null)
+                {
+                    MySqlDataReader reader = null;
+                    sql = "SELECT gradschoolname, fundingtype, city, state, environment " + 
+                    "FROM FavUniversities, University " +
+                    "WHERE accountemail='" + email + "' and gradschoolname=name ";
+                    MySqlCommand command = new MySqlCommand(sql, conn);
+                    using (reader = command.ExecuteReader())
+                    {
+                        int i = 0;
+                        while (reader.Read() && i < favUnis.Count)
+                        {
+                            University p = new University
+                            {
+                                name = (string)reader["gradschoolname"],
+                                fundingtype = (string)reader["fundingtype"],
+                                city = (string)reader["city"],
+                                state = (string)reader["state"],
+                                environment = (string)reader["environment"]
+                            };
+                            favUnis[i] = p;
+                            i++;
+                        }
+                       
+                    }
+                }
+            }
+            catch (MySqlException)
+            {
+                Console.Write("Invalid parameters for insertion" + "\n");
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return favUnis;
+            
+        }//end addFavUniversity
+
+
+        //
         public University[] displayUniversities(University[] unis)
         {
             string sql = null;
