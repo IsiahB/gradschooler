@@ -7,10 +7,10 @@ using System.Web.Mvc;
 
 namespace GradSchooler.Controllers
 {
-    public class ProfileController : Controller
+    public class ProfilerController : Controller
     {
         [Authorize] //if you are not authorized, it wont let you to the page
-        public ActionResult Profile()
+        public ActionResult Profiler()
         {
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
 
@@ -43,9 +43,8 @@ namespace GradSchooler.Controllers
             string userEmail = User.Identity.Name;
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
             db.deleteAccount(userEmail);
-            LoginController lc = new LoginController();
-
-            return lc.Logout();
+            //can you log out of an account you've deleted?
+            return RedirectToAction("Index", "Home");
 
         }
     }

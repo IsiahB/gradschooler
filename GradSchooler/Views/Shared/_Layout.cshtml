@@ -18,22 +18,23 @@
                     <li>@Html.ActionLink("UNIVERSITIES", "University", "University")</li>
                     <li>@Html.ActionLink("PROGRAMS", "Program", "Program")</li>
                     <li>@Html.ActionLink("GRE", "Index", "Home")</li>
-                    <li>@Html.ActionLink("About", "About", "Home")</li>
+                    <!--<li>@Html.ActionLink("About", "About", "Home")</li>--->
                 </ul>
 
                 <ul class="nav navbar-nav">
                     <!--When a user is logged in-->
                     @if (Request.IsAuthenticated)
                     {
-                        <li>Hello! @Html.Encode(User.Identity.Name)</li>
+                        <li><a href="@Url.Action("Profiler", "Profiler")" class="btn" disabled> Hello,@Html.Encode(User.Identity.Name)   <i class="fas fa-user"></i></a>  </li>
                         <li>@Html.ActionLink("LOGOUT", "Logout", "Login")</li>
-                        <li>@Html.ActionLink("PROFILE", "Profile", "Profile")</li>
+
+                        <li>@Html.ActionLink("PROFILE", "Profiler", "Profiler")</li>
                         //Html.ActionLink("label name", "ActionResult method, "Controller name")
                     }
                     else
                     {
                         <!--When a user is logged out-->
-                        <li>@Html.ActionLink("LOGIN", "Login", "Login") </li>
+                        <li> <a href="@Url.Action("Login", "Login")" class="btn"> LOGIN <i class="fas fa-user"></i> </a></li>
                         <li>@Html.ActionLink("CREATE ACCOUNT", "CreateAccountPage", "CreateAccount")</li>
                         <!-- DROP DOWN FOR LOGGING IN
                         <li class="dropdown">
@@ -53,7 +54,7 @@
                                 </form>
                                 Html.ActionLink("Sign Up", "CreateAccountPage", "CreateAccount")
                             </div>
-                            
+
                         </li>
                         -->
                     }
