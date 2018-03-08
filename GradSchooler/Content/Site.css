@@ -24,8 +24,8 @@ textarea {
 }
 
 .navbar-inverse {
-    background-color: #536DFE;
-    border-color: #536DFE;
+    background-color: aliceblue;
+    border-color: transparent;
 }
 
 /*This changes the GradSchooler title color, seperate from navbar*/
@@ -38,24 +38,11 @@ textarea {
 }
 
 .jumbotron {
-    padding: 30px;
-    margin-bottom: 30px;
-    font-size: 21px;
-    font-weight: 200;
-    line-height: 2.1428571435;
-    color: black;
-    background-color: pink;
-}
-
-.jumbotron {
-    margin-bottom: 0px;
-    background-image: url(https://thumbs.dreamstime.com/b/owl-cute-owl-watercolor-forest-bird-school-books-illustration-cartoon-bird-background-80666953.jpg);
-    background-attachment: fixed;
-    background-position: 0% 50%;
+    background-color: honeydew;
     background-size: cover;
     background-repeat: no-repeat;
-    color: white;
-    /*text-shadow: b 0.9em 0.3em 0.3em*//
+    color: black;
+    /*text-shadow: b 0.9em 0.3em 0.3em*/ /
 }
 
 
