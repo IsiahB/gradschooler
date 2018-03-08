@@ -17,8 +17,8 @@ namespace GradSchooler.Controllers
             String userEmail = User.Identity.Name;
             String userName = db.getAccFirstName(userEmail);
             List<University> favUnis = db.getFavUniversities(userEmail);
-
             var size = favUnis.Count;
+
             if (size == 0)
             {
                 University u = new University
@@ -31,9 +31,6 @@ namespace GradSchooler.Controllers
                 };
                 favUnis.Add(u);
             }
-            else {
-                favUnis = db.getFavUniversities(userEmail);
-            }
             
             ViewData["favUnis"] = favUnis;
 
@@ -41,11 +38,11 @@ namespace GradSchooler.Controllers
         }
 
        [HttpPost]
-       public ActionResult DeleteProfile(Account acc)
+       public ActionResult DeleteProfile()
         {
-            acc.email = User.Identity.Name;
+            string userEmail = User.Identity.Name;
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
-            db.deleteAccount(acc.email);
+            db.deleteAccount(userEmail);
             LoginController lc = new LoginController();
 
             return lc.Logout();

@@ -26,22 +26,31 @@ namespace GradSchooler.Controllers
         }//end of get method
 
         [HttpPost]
-        public ActionResult University(Profile p)
+        public ActionResult FavoriteUniversity()
         {
             if (ModelState.IsValid)
             {
                 DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
 
                 String curEmail = User.Identity.Name;//get the email of the person logged in
-                Debug.WriteLine("CURRENT LOGGED IN USER: " + curEmail); //test
 
                 //get post data from request object
-                var favUnisData = this.Request.Form; //get the data from the form
-                for (int i = 0; i < favUnisData.Count; i++)
+                List<String> favUnisData = new List<String>();
+
+                foreach(var key in Request.Form.AllKeys)
                 {
-                    p.favUnis[i] = favUnisData[i];
-                    db.addFavUniversity(curEmail, p.favUnis[i]); //add favUni to database
-                }
+                    if (key.StartsWith("favUnis"))
+                    {
+                        String s = Convert.ToString(Request.Form[key]);
+                        String[] values = s.Split(',');
+                        foreach(var item in values)
+                        {
+                            db.addFavUniversity(curEmail, item); //add favUni to database;
+                        }//end foreach
+                    }//end if
+                }//end foreach
+
+
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -49,7 +58,7 @@ namespace GradSchooler.Controllers
                 ModelState.AddModelError("","This action cannot be performed");
             }
 
-            return View(p);
+            return View();
         }//end of post method
 
     }//end of class

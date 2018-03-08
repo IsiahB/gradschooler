@@ -273,12 +273,11 @@ namespace GradSchooler.DBUtilities
                     MySqlDataReader reader = null;
                     sql = "SELECT gradschoolname, fundingtype, city, state, environment " + 
                     "FROM FavUniversities, University " +
-                    "WHERE accountemail='" + email + "' and gradschoolname=name ";
+                    "WHERE accountemail='" + email + "' and gradschoolname=name";
                     MySqlCommand command = new MySqlCommand(sql, conn);
                     using (reader = command.ExecuteReader())
                     {
-                        int i = 0;
-                        while (reader.Read() && i < favUnis.Count)
+                        while (reader.Read())
                         {
                             University p = new University
                             {
@@ -288,8 +287,7 @@ namespace GradSchooler.DBUtilities
                                 state = (string)reader["state"],
                                 environment = (string)reader["environment"]
                             };
-                            favUnis[i] = p;
-                            i++;
+                            favUnis.Add(p);
                         }
                        
                     }
