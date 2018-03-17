@@ -7,11 +7,6 @@ namespace GradSchooler.Database{
     // </summary>
     public class DBConnector
     {
-        // log messages
-        private const string SOURCE = "DBConnector";
-        private const string SUCCESS = "Successfully Connected to the Database";
-        private const string BAD_LOGIN = "Could not login to the Database";
-        private const string BAD_CONNECTION = "Error Connecting to database. Database could not be reached.";
 
         // members
         private MySqlConnection conn;
@@ -43,13 +38,12 @@ namespace GradSchooler.Database{
                 //create connection to database
                 conn = new MySqlConnection(conn_string.ToString());
                 conn.Open();
-                //if (conn != null) Logger.Instance.log(SOURCE, SUCCESS);
-                //else Logger.Instance.log(SOURCE, BAD_LOGIN);
+                
                 return true;
             }
             catch(MySqlException)
             {
-                //Logger.Instance.error(SOURCE, BAD_CONNECTION, false);
+                
                 return false;
             }//catch
 

@@ -43,8 +43,6 @@ namespace GradSchooler.Controllers
                 }//else
             }//if
             return View(acc);
-
-          //  FormsAuthentication.SignOut();
         }//login
 
         //logout method

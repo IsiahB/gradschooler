@@ -15,6 +15,7 @@ namespace GradSchooler.Controllers
         public ActionResult University()
         {
             ViewBag.Message = "University Page";
+            scrapey();
 
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
             int size = db.tableSizes("University");
@@ -59,7 +60,19 @@ namespace GradSchooler.Controllers
             }
 
             return View();
-        }//end of post method
+        }//end of post method 
+
+        public void scrapey()
+        {
+            Scraper s = new Scraper();
+            //0List<University> li = s.scrape();
+            ///if(li.Count != 0)
+                //Debug.WriteLine(li.ToString());
+
+            s.UniversitiesByState();
+           
+        }
 
     }//end of class
+   
 }//end of namespace
