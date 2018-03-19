@@ -7,65 +7,13 @@ using ScrapySharp.Extensions;
 using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Web.UI.HtmlControls;
 
 namespace GradSchooler
 {
     public class Scraper
     {
-        /*public University[] scrape()
-       {
-           System.Diagnostics.Debug.WriteLine("HERE MTHRFKR!!");
-           University[] un = new University[10000000];
-           String[] states = new String[55];
 
-           var url = "https://university.graduateshotline.com/ubystate.html#WA";
-           var webGet = new HtmlWeb();
-           if (webGet.Load(url) is HtmlDocument document)
-           {
-               System.Diagnostics.Debug.WriteLine("Here 1" + '\n');
-               var nodes = document.DocumentNode.CssSelect("#item-search-results li").ToList();
-               for (var i = 0; i < 50; i++)
-               {
-                   System.Diagnostics.Debug.WriteLine("Here 2" + '\n');
-                   un[i] = new University();
-                   foreach (var node in nodes)
-                   {
-                       System.Diagnostics.Debug.WriteLine("Here 3" + '\n');
-                       un[i].state = node.CssSelect("h2 a").Single().InnerText;
-
-                   }//end foreach
-               }//end outer for
-           }//end if
-           return un;
-       }//end scrape*/
-
-/*
-        public List<University> scrape()
-        {
-            var uniList = new List<University>();
-            //string file = @"C:\Users\Administrator\source\repos\GradSchooler\GradSchooler\Scraper\ubystate.html";
-            string url = "https://www.gradschools.com/graduate-schools-in-united-states/washington";
-            HtmlWeb web = new HtmlWeb();
-            HtmlDocument doc = web.Load(url);
-            //var doc = new HtmlDocument();
-            //doc.Load(file);
-            var node = doc.DocumentNode.SelectSingleNode("
-            /*Debug.WriteLine(node.OuterHtml);
-
-            if (doc.DocumentNode != null && doc.ParseErrors != null && !doc.ParseErrors.Any())
-                return null;
-
-            var names = doc.DocumentNode.SelectNodes("/html/body/div//div/ol/li//a");
-            var states = doc.DocumentNode.SelectNodes("/html/body/div//div/ol/li//p//a/big/b");
-
-            foreach (var el in names.Zip(states, (n, s) => new University {name = n.InnerText, state = s.InnerText}))
-            {
-                uniList.Add(el);
-            }
-
-            return uniList;
-        }//end method
-   **/
         public Dictionary<String, List<String>> UniversitiesByState()
         {
             Dictionary<String, List<String>> d = new Dictionary<String, List<String>>();
@@ -84,7 +32,7 @@ namespace GradSchooler
                     {
                         if(statename != "")
                         {
-                            d.Add(statename, unis);
+                            d.Add(statename, unis); // add the schools of each state to the dictionary
                         }
                         string s = line.Substring(24); //returns a string that contains all chars past the 24th char
                         statename = s.Substring(0, s.IndexOf('<'));
@@ -104,6 +52,35 @@ namespace GradSchooler
 
 
         }
+
+
+        public void ProgramScrape()
+        {
+
+            string url = "https://www.gradschools.com/institutions";
+            HtmlWeb web = new HtmlWeb();
+            HtmlDocument doc = web.Load(url);
+            
+
+            //TODO
+            //get university names from database
+            string name = "Pacific Lutheran University";
+
+            //getElementById(button name) for the button
+            HtmlNode searchLink = doc.GetElementbyId("edit-submit-institution-campus-list");
+
+            //put it in the search bar on the webpage and invoke a click on "apply" button
+            //doc.  ("ok").InnerText = name;
+            
+
+            //get the first a href link and invoke the click (same way as previous invoke)
+            //get the program titles and add them to the database
+
+            
+        }
+
+
+
     }// class
 }// namespace
 

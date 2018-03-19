@@ -169,7 +169,7 @@ namespace GradSchooler.DBUtilities
                 conn.Close();
             }
             return false;
-        }//end createAccount
+        }//end addFavUniversity
 
         public Boolean updateFavUniversity(Profile profile)
         {
@@ -287,7 +287,6 @@ namespace GradSchooler.DBUtilities
                             };
                             favUnis.Add(p);
                         }
-                       
                     }
                 }
             }
@@ -303,10 +302,91 @@ namespace GradSchooler.DBUtilities
             
         }//end addFavUniversity
 
+        public Boolean addUniversity()
+        {
+            //read the file and return the dictionary
+            Scraper s = new Scraper();
+            Dictionary<String, List<String>> dict = s.UniversitiesByState();
+
+
+            var cmd2 = new MySqlCommand();
+            List<String> sqlList = new List<String>(); //in order to execute multiple sql inserts
+            
+            //insert into database
+            string sqlP = null;
+
+            try
+            {
+                if (conn.State != System.Data.ConnectionState.Open)
+                {
+                    conn.Close(); //just incase it is broken
+                    conn.Open(); //open the database connection 
+
+                    cmd2.Connection = conn;
+                }//if
+
+                if (conn != null)
+                {
+                    foreach (var item in dict)
+                    {
+                        //Debug.Write(item.Key + " " );
+                        foreach (var el in item.Value)
+                        {
+                            //Debug.Write(el + ", ");
+                            if (true)
+                            {
+                                sqlP = "INSERT INTO University " +
+                                "VALUES ('" + el + "', 'Private', 'n/a', '" + item.Key + "', 'n/a')";
+                                //Debug.WriteLine(sqlP + " ");
+                                sqlList.Add(sqlP); 
+                            }
+                        }
+                        Debug.WriteLine("");
+                    }
+
+                    if (conn.State != System.Data.ConnectionState.Open)
+                    {
+                        conn.Close(); //just incase it is broken
+                        conn.Open(); //open the database connection 
+
+                        cmd2.Connection = conn;
+                    }//if
+
+                    string allInserts = string.Join(";", sqlList);
+                    Debug.WriteLine(allInserts + " ");
+                    cmd2.CommandText = allInserts;
+                    cmd2.ExecuteNonQuery();
+
+                    return true;
+                }
+
+            }
+            catch (MySqlException)
+            {
+                Console.Write("Invalid parameters for insertion" + "\n");
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }//end addUniversities
+
+        public Boolean UniversityPopulated()
+        {
+            if(displayUniversities().Count == 0) { return false; }
+            return true;
+
+        }
+
+
+
 
         //
-        public University[] displayUniversities(University[] unis)
+        public List<University> displayUniversities()
         {
+            List<University> unis = new List<University>();
+
             string sql = null;
             try
             {
@@ -324,8 +404,7 @@ namespace GradSchooler.DBUtilities
                     MySqlCommand command = new MySqlCommand(sql, conn);
                     using (reader = command.ExecuteReader())
                     {
-                        int b = 0;
-                        while (reader.Read() && b < unis.Length)
+                        while (reader.Read())
                         {
                             University u = new University
                             {
@@ -336,10 +415,7 @@ namespace GradSchooler.DBUtilities
                                 environment = (string)reader["environment"]
                             };
 
-                            //Console.Write("b value:" + b + "  ");
-                            unis[b] = u;
-                            //Console.Write("name: " + unis[b].name + "\n");
-                            b++;
+                            unis.Add(u);  
                         }
                     }
                 }
