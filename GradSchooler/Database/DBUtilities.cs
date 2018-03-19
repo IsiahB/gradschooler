@@ -311,9 +311,17 @@ namespace GradSchooler.DBUtilities
 
             var cmd2 = new MySqlCommand();
             List<String> sqlList = new List<String>(); //in order to execute multiple sql inserts
-            
+
             //insert into database
-            string sqlP = null;
+            String sqlP = "INSERT INTO University VALUES (@name, @fundingtype, @city, @state, @environment)";
+            MySqlCommand cmd = new MySqlCommand(sqlP, conn);
+            string elD = "";
+            string itemD = "";
+            cmd.Parameters.AddWithValue("@name", elD);
+            cmd.Parameters.AddWithValue("@fundingtype", "Private");
+            cmd.Parameters.AddWithValue("@city", "n/a");
+            cmd.Parameters.AddWithValue("@state", itemD);
+            cmd.Parameters.AddWithValue("@environment", "n/a");
 
             try
             {
@@ -321,12 +329,11 @@ namespace GradSchooler.DBUtilities
                 {
                     conn.Close(); //just incase it is broken
                     conn.Open(); //open the database connection 
-
-                    cmd2.Connection = conn;
                 }//if
 
                 if (conn != null)
                 {
+                    cmd.Prepare();
                     foreach (var item in dict)
                     {
                         //Debug.Write(item.Key + " " );
@@ -335,35 +342,32 @@ namespace GradSchooler.DBUtilities
                             //Debug.Write(el + ", ");
                             if (true)
                             {
-                                sqlP = "INSERT INTO University " +
-                                "VALUES ('" + el + "', 'Private', 'n/a', '" + item.Key + "', 'n/a')";
-                                //Debug.WriteLine(sqlP + " ");
-                                sqlList.Add(sqlP); 
+                                cmd.Parameters[0].Value =  el;
+                                cmd.Parameters[3].Value = item.Key;
+
+                                //put try
+                                //catch, print error message and it will continue
+                                try
+                                {
+                                    cmd.ExecuteNonQuery();
+                                }
+                                catch(MySqlException e)
+                                {
+                                    Debug.WriteLine("Problems with sql stuff, this is the problem:  " + e);
+                                }
+                              
                             }
                         }
                         Debug.WriteLine("");
                     }
 
-                    if (conn.State != System.Data.ConnectionState.Open)
-                    {
-                        conn.Close(); //just incase it is broken
-                        conn.Open(); //open the database connection 
-
-                        cmd2.Connection = conn;
-                    }//if
-
-                    string allInserts = string.Join(";", sqlList);
-                    Debug.WriteLine(allInserts + " ");
-                    cmd2.CommandText = allInserts;
-                    cmd2.ExecuteNonQuery();
-
                     return true;
                 }
 
             }
-            catch (MySqlException)
+            catch (MySqlException e)
             {
-                Console.Write("Invalid parameters for insertion" + "\n");
+                Debug.WriteLine("Invalid parameters for insertion    : " + e);
             }
             finally
             {

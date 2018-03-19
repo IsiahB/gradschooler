@@ -19,7 +19,7 @@ namespace GradSchooler
             Dictionary<String, List<String>> d = new Dictionary<String, List<String>>();
 
             string[] lines;
-            lines = System.IO.File.ReadAllLines(@"C:\Users\Administrator\source\repos\GradSchooler\GradSchooler\Scraper\ubystate.html");
+            lines = System.IO.File.ReadAllLines(@"C:\Users\Isiah\Source\Repos\website\GradSchooler\Scraper\ubystate.html");
             string statename = "";
             List<String> unis = new List<String>();
             var counter = 0;
