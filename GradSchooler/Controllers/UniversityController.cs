@@ -17,9 +17,8 @@ namespace GradSchooler.Controllers
             ViewBag.Message = "University Page";
 
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
-            int size = db.tableSizes("University");
             List <University> univs = new List<University>();
-            db.addUniversity(); //adds universities to the database
+
             univs = db.displayUniversities();
             ViewData["unis"] = univs;
 
