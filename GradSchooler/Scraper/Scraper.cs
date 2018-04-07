@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Web.UI.HtmlControls;
 
+
 namespace GradSchooler
 {
     public class Scraper
@@ -56,18 +57,70 @@ namespace GradSchooler
 
         public void ProgramScrape()
         {
+            //get the university state, name and city
+            DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
+            List<University> unis = db.displayUniversities();
+            string s = "";
+            foreach (var u in unis)
+            {
+                s = u.name; //the university name 
+                var sArray = s.Split(' '); //separate each word in the name into a string array
+                string endURL = "";
+                foreach(var ite in sArray)
+                {
+                    Debug.Write(ite + " ");
+                }
 
-            string url = "https://www.gradschools.com/institutions";
-            HtmlWeb web = new HtmlWeb();
-            HtmlDocument doc = web.Load(url);
+                //loop over the array to fix the url with appropriate dashes
+                for (int i = 0; i < sArray.Length; i++)
+                { 
+                    if (sArray[i].Equals("of"))
+                    {
+                        sArray[i] = "";
+                    }
+                    if(sArray[i].Contains("'"))
+                    {
+                        string st = sArray[i];
+                        string str = ""; //string that has no apostrophes
+                        var arr = st.Split('\''); //handles apostrophes
+                            
+                        for(var item = 0; item < arr.Length; item++)
+                        {
+                            Debug.WriteLine("CountterER:    " + item);
+                            str += arr[item];
+                        }
+                            
+                        //Debug.WriteLine(str);
+                            
+                        sArray[i] = str; //put the correct string back into the array
+                        endURL += sArray[i] + "-";
+                        Debug.WriteLine(sArray[i]);
+                    }
+                    else
+                    {
+                        endURL += sArray[i] + "-";
+                    }
+                }
+
+                endURL += u.city.Replace(' ', '-'); //concatinate the city name to the string url for scraping purposes
+
+                string url = "https://www.gradschools.com/graduate-schools-in-united-states/"+u.state.Replace(' ', '-')+"/"+endURL;
+
+                Debug.WriteLine(url);
+
+                //ProgramScrape(url);
+
+            }//foreach
+
+            
             
 
             //TODO
             //get university names from database
-            string name = "Pacific Lutheran University";
+            //string name = "Pacific Lutheran University";
 
             //getElementById(button name) for the button
-            HtmlNode searchLink = doc.GetElementbyId("edit-submit-institution-campus-list");
+            //HtmlNode searchLink = doc.GetElementbyId("edit-submit-institution-campus-list");
 
             //put it in the search bar on the webpage and invoke a click on "apply" button
             //doc.  ("ok").InnerText = name;
@@ -77,6 +130,13 @@ namespace GradSchooler
             //get the program titles and add them to the database
 
             
+        }
+
+        private void ProgramScrape(string url)
+        {
+            //check if valid url
+            HtmlWeb web = new HtmlWeb();
+            HtmlDocument doc = web.Load(url);
         }
 
 

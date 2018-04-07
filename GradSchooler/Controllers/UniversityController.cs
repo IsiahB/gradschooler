@@ -16,6 +16,9 @@ namespace GradSchooler.Controllers
         {
             ViewBag.Message = "University Page";
 
+            Scraper s = new Scraper();
+            s.ProgramScrape();
+
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
             List <University> univs = new List<University>();
 

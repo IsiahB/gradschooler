@@ -386,7 +386,7 @@ namespace GradSchooler.DBUtilities
 
 
 
-        //
+        // - getUniversityList
         public List<University> displayUniversities()
         {
             List<University> unis = new List<University>();
