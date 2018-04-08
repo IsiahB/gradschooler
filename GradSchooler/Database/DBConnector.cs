@@ -10,7 +10,9 @@ namespace GradSchooler.Database{
 
         // members
         private MySqlConnection conn;
+        //used to be mal.cs.plu.edu
         private const string server = "mal.cs.plu.edu";
+        private const uint port = 2000; 
         private const string userID = "grads";
         private const string password = "grads";
         private const string database = "gradschooler";
@@ -29,6 +31,7 @@ namespace GradSchooler.Database{
             {
                 MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder
                 {
+                    //Port = port,
                     Server = server,
                     UserID = userID,
                     Password = password,

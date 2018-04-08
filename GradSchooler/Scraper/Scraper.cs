@@ -8,19 +8,20 @@ using System.Linq;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Web.UI.HtmlControls;
-
+using System.Net;
 
 namespace GradSchooler
 {
     public class Scraper
     {
-
+        
+        //Read the html file to get Universities by State
         public Dictionary<String, List<String>> UniversitiesByState()
         {
             Dictionary<String, List<String>> d = new Dictionary<String, List<String>>();
 
             string[] lines;
-            lines = System.IO.File.ReadAllLines(@"C:\Users\Administrator\source\repos\GradSchooler\GradSchooler\Scraper\ubystate.html");
+            lines = System.IO.File.ReadAllLines(@"/Users/JChase/Projects/Capstone/_git/website/GradSchooler/Scraper/ubystate.html");
             string statename = "";
             List<String> unis = new List<String>();
             var counter = 0;
@@ -48,11 +49,9 @@ namespace GradSchooler
                 counter++;
             }
 
-
             return d;
 
-
-        }
+        }//UniversitiesByState
 
 
         public void ProgramScrape()
@@ -60,6 +59,7 @@ namespace GradSchooler
             //get the university state, name and city
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
             List<University> unis = db.displayUniversities();
+
             string s = "";
             foreach (var u in unis)
             {
@@ -68,7 +68,7 @@ namespace GradSchooler
                 string endURL = "";
                 foreach(var ite in sArray)
                 {
-                    Debug.Write(ite + " ");
+                    //Debug.Write(ite + " ");
                 }
 
                 //loop over the array to fix the url with appropriate dashes
@@ -83,15 +83,15 @@ namespace GradSchooler
                         string st = sArray[i];
                         string str = ""; //string that has no apostrophes
                         var arr = st.Split('\''); //handles apostrophes
-                            
+
                         for(var item = 0; item < arr.Length; item++)
                         {
                             Debug.WriteLine("CountterER:    " + item);
                             str += arr[item];
                         }
-                            
+
                         //Debug.WriteLine(str);
-                            
+
                         sArray[i] = str; //put the correct string back into the array
                         endURL += sArray[i] + "-";
                         Debug.WriteLine(sArray[i]);
@@ -100,44 +100,68 @@ namespace GradSchooler
                     {
                         endURL += sArray[i] + "-";
                     }
-                }
+                }//end for
 
-                endURL += u.city.Replace(' ', '-'); //concatinate the city name to the string url for scraping purposes
+                endURL += u.city.Replace(' ', '-'); //concatinate the city name to the university name for scraping purposes
 
-                string url = "https://www.gradschools.com/graduate-schools-in-united-states/"+u.state.Replace(' ', '-')+"/"+endURL;
-
-                Debug.WriteLine(url);
-
-                //ProgramScrape(url);
+                string url = "https://www.gradschools.com/graduate-schools-in-united-states/";
+                url += u.state.Replace(' ', '-') + "/" + endURL + "?page=";
+                Debug.WriteLine("url before passing it in : " + url);
+                ProgramScrape(url);
 
             }//foreach
 
             
-            
+        }//end ProgramScrape()
 
-            //TODO
-            //get university names from database
-            //string name = "Pacific Lutheran University";
-
-            //getElementById(button name) for the button
-            //HtmlNode searchLink = doc.GetElementbyId("edit-submit-institution-campus-list");
-
-            //put it in the search bar on the webpage and invoke a click on "apply" button
-            //doc.  ("ok").InnerText = name;
-            
-
-            //get the first a href link and invoke the click (same way as previous invoke)
-            //get the program titles and add them to the database
-
-            
-        }
-
+        //private helper method to scrape the programs
         private void ProgramScrape(string url)
         {
-            //check if valid url
-            HtmlWeb web = new HtmlWeb();
-            HtmlDocument doc = web.Load(url);
-        }
+            //url = "https://www.gradschools.com/graduate-schools-in-united-states/washington/university-washington-seattle?page=";
+
+            List<string> programs = new List<string>();
+            bool empty = false;
+            int pagenum = 0;
+            //read the webpages and get the programs
+            while (!empty)
+            {
+                int eq = url.IndexOf('=');
+                url = url.Substring(0, eq + 1);
+                url = url + "" + pagenum;
+                Debug.WriteLine("theurl : " + url);
+                HtmlWeb web = new HtmlWeb();
+                HtmlDocument doc = web.Load(url);
+                HttpWebRequest r = (HttpWebRequest)WebRequest.Create(url);
+                //check if valid url
+                if (r.Address.OriginalString != "https://www.gradschools.com/")
+                {
+
+                    Debug.WriteLine("the url : " + r.Address.OriginalString);
+
+                    try
+                    {
+                        foreach (HtmlNode li in doc.DocumentNode.SelectNodes("//*[@id='" + "eddy-listings" + "']/li/h3/a/span"))
+                        {
+                            //check if the page has programs
+
+                            programs.Add(li.InnerText);
+                        }
+                    }
+                    catch (NullReferenceException e)
+                    {
+                        Debug.WriteLine("The inner text was null" + e);
+                        empty = true;
+                    }
+                    pagenum++;
+                }//if
+
+            }//end while
+
+            foreach (var thing in programs)
+            {
+                //Debug.WriteLine("thing: " + thing);
+            }
+        }//Program Scrape Method
 
 
 

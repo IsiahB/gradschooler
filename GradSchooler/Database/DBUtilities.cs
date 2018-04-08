@@ -313,7 +313,7 @@ namespace GradSchooler.DBUtilities
             List<String> sqlList = new List<String>(); //in order to execute multiple sql inserts
 
             //insert into database
-            String sqlP = "INSERT INTO University VALUES (@name, @fundingtype, @city, @state, @environment)";
+            String sqlP = "INSERT INTO University VALUES (@name, @fundingtype, @city, @state, @environment, @uniURL, @address)";
             MySqlCommand cmd = new MySqlCommand(sqlP, conn);
             string elD = "";
             string itemD = "";
@@ -322,6 +322,8 @@ namespace GradSchooler.DBUtilities
             cmd.Parameters.AddWithValue("@city", "n/a");
             cmd.Parameters.AddWithValue("@state", itemD);
             cmd.Parameters.AddWithValue("@environment", "n/a");
+            cmd.Parameters.AddWithValue("@uniURL", "");
+            cmd.Parameters.AddWithValue("@address", "");
 
             try
             {
@@ -353,7 +355,8 @@ namespace GradSchooler.DBUtilities
                                 }
                                 catch(MySqlException e)
                                 {
-                                    Debug.WriteLine("Problems with sql stuff, this is the problem:  " + e);
+                                    //catching exception - is there a better way?
+                                    //Debug.WriteLine("Problems with sql stuff, this is the problem:  " + e);
                                 }
                               
                             }
@@ -403,7 +406,7 @@ namespace GradSchooler.DBUtilities
                 if(conn != null)
                 {
                     MySqlDataReader reader = null;
-                    sql = "SELECT * " +
+                    sql = "SELECT name, fundingtype, city, state, environment " +
                         "FROM University ";
                     MySqlCommand command = new MySqlCommand(sql, conn);
                     using (reader = command.ExecuteReader())
@@ -424,9 +427,9 @@ namespace GradSchooler.DBUtilities
                     }
                 }
             }
-            catch (MySqlException)
+            catch (MySqlException e)
             {
-                Console.Write("Could not display data properly" + "\n");
+                Console.Write("This is the problem: " + e + "\n");
             }
             finally
             {
