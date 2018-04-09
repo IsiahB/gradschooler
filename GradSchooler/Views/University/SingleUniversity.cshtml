@@ -1,0 +1,103 @@
+﻿@using GradSchooler.Models
+@{ 
+    ViewBag.Title = "University";
+    var item = (University)ViewData["uni"];
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>University Information</title>
+    <style>
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        input[type=text], select, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-top: 6px;
+            margin-bottom: 16px;
+            resize: vertical;
+        }
+
+        input[type=submit] {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+            input[type=submit]:hover {
+                background-color: #45a049;
+            }
+
+        .container {
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h3>University Information</h3>
+
+    <!-- diaplay university information -->
+    @using (Html.BeginForm("SingleUniversity", "University", FormMethod.Post))
+    {
+        <table>
+            <tr>
+                <th>University</th>
+                <th><input type="checkbox" name="funding" value="@item.fundingtype" />Funding</th>
+                <th><input type="checkbox" name="city" value="@item.city" />City</th>
+                <th><input type="checkbox" name="state" value="@item.state" />State</th>
+                <th><input type="checkbox" name="environment" value="@item.environment" />Environment</th>
+            </tr>
+            <tr>
+                 <td>@item.name</td>
+                 <td>@item.fundingtype</td>
+                 <td>@item.city</td>
+                 <td>@item.state</td>
+                 <td>@item.environment</td>
+            </tr>
+        </table>
+        <input type="submit" value="Update">
+    }
+
+
+    @if (false) {
+        <!-- Form to submit new university info -->
+        using (Html.BeginForm("Login", "Login", FormMethod.Post))
+        {
+            <div class="container">
+                <label for="fname">Funding Type</label>
+                <input type="text" id="fname" name="firstname" placeholder="ok">
+
+                <label for="lname">City</label>
+                <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+
+                <label for="country">State</label>
+                <select id="country" name="country">
+                    <option value="australia">Australia</option>
+                    <option value="canada">Canada</option>
+                    <option value="usa">USA</option>
+                </select>
+
+                <label for="subject">Subject</label>
+                <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
+
+                <input type="submit" value="Submit">
+            </div>
+        }
+    }
+
+</body>
+</html>

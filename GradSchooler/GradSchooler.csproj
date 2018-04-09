@@ -238,6 +238,7 @@
     <Content Include="Views\Login\Login.cshtml" />
     <Content Include="Views\Profile\Profile.cshtml" />
     <None Include="favicon.ico" />
+    <Content Include="Views\University\SingleUniversity.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

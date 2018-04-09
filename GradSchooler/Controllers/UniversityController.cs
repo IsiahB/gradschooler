@@ -62,7 +62,16 @@ namespace GradSchooler.Controllers
             }
 
             return View();
-        }//end of post method 
+        }//end of post method
+        
+
+        public ActionResult SingleUniversity(University u)
+        {
+            Debug.WriteLine("The uni: " + u.name);
+            ViewData["uni"] = u;
+
+            return View();
+        }
 
 
     }//end of class

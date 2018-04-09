@@ -21,7 +21,7 @@ namespace GradSchooler
             Dictionary<String, List<String>> d = new Dictionary<String, List<String>>();
 
             string[] lines;
-            lines = System.IO.File.ReadAllLines(@"/Users/JChase/Projects/Capstone/_git/website/GradSchooler/Scraper/ubystate.html");
+            lines = System.IO.File.ReadAllLines(@"C:\Users\Administrator\source\repos\GradSchooler\GradSchooler\Scraper\ubystate.html");
             string statename = "";
             List<String> unis = new List<String>();
             var counter = 0;
@@ -117,8 +117,6 @@ namespace GradSchooler
         //private helper method to scrape the programs
         private void ProgramScrape(string url)
         {
-            //url = "https://www.gradschools.com/graduate-schools-in-united-states/washington/university-washington-seattle?page=";
-
             List<string> programs = new List<string>();
             bool empty = false;
             int pagenum = 0;
