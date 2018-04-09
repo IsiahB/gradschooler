@@ -21,7 +21,7 @@ namespace GradSchooler
             Dictionary<String, List<String>> d = new Dictionary<String, List<String>>();
 
             string[] lines;
-            lines = System.IO.File.ReadAllLines(@"C:\Users\Administrator\source\repos\GradSchooler\GradSchooler\Scraper\ubystate.html");
+            lines = System.IO.File.ReadAllLines(@"/Users/JChase/Projects/Capstone/_git/website/GradSchooler/Scraper/ubystate.html");
             string statename = "";
             List<String> unis = new List<String>();
             var counter = 0;
@@ -135,21 +135,22 @@ namespace GradSchooler
                 {
 
                     Debug.WriteLine("the url : " + r.Address.OriginalString);
-
-                    try
+                    HtmlNodeCollection collection = doc.DocumentNode.SelectNodes("//*[@id='" + "eddy-listings" + "']/li/h3/a/span");
+                    if (collection == null)
                     {
-                        foreach (HtmlNode li in doc.DocumentNode.SelectNodes("//*[@id='" + "eddy-listings" + "']/li/h3/a/span"))
-                        {
-                            //check if the page has programs
+                        empty = true;
 
+                    }
+                    else
+                    {
+                        foreach (HtmlNode li in collection)
+                        {
+
+                            //check if the page has programs
                             programs.Add(li.InnerText);
                         }
                     }
-                    catch (NullReferenceException e)
-                    {
-                        Debug.WriteLine("The inner text was null" + e);
-                        empty = true;
-                    }
+
                     pagenum++;
                 }//if
 
