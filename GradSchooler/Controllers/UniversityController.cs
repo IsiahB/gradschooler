@@ -63,14 +63,22 @@ namespace GradSchooler.Controllers
 
             return View();
         }//end of post method
-        
 
         public ActionResult SingleUniversity(University u)
         {
-            Debug.WriteLine("The uni: " + u.name);
             ViewData["uni"] = u;
-
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult SingleUniversity(University u, string s){
+            //Debug.Write("University wanted to name: " + u.name);
+            //Debug.WriteLine("The funding type: " + u.fundingtype);
+
+            DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
+
+
+            return RedirectToAction("University", "University");
         }
 
 

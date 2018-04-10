@@ -1,7 +1,8 @@
 ﻿@using GradSchooler.Models
+@model GradSchooler.Models.University
 @{ 
     ViewBag.Title = "University";
-    var item = (University)ViewData["uni"];
+    University item = (University)ViewData["uni"];
 
 }
 
@@ -30,7 +31,7 @@
         input[type=submit] {
             background-color: #4CAF50;
             color: white;
-            padding: 12px 20px;
+            padding: 4px 8px;
             border: none;
             border-radius: 4px;
             cursor: pointer;
@@ -42,7 +43,7 @@
 
         .container {
             border-radius: 5px;
-            background-color: #f2f2f2;
+
             padding: 20px;
         }
     </style>
@@ -56,44 +57,53 @@
         <table>
             <tr>
                 <th>University</th>
-                <th><input type="checkbox" name="funding" value="@item.fundingtype" />Funding</th>
-                <th><input type="checkbox" name="city" value="@item.city" />City</th>
-                <th><input type="checkbox" name="state" value="@item.state" />State</th>
-                <th><input type="checkbox" name="environment" value="@item.environment" />Environment</th>
+                <th><input type="checkbox" name="funding" value="@item.fundingtype" /></th>
+                <th>Funding</th>
+                <th><input type="checkbox" name="city" value="@item.city" /></th>
+                <th>City</th>
+                <th><input type="checkbox" name="state" value="@item.state" /></th>
+                <th>State</th>
+                <th><input type="checkbox" name="environment" value="@item.environment" /></th>
+                <th>Environment</th>
             </tr>
             <tr>
                  <td>@item.name</td>
+                 <td></td>
                  <td>@item.fundingtype</td>
+                 <td></td>
                  <td>@item.city</td>
+                 <td></td>
                  <td>@item.state</td>
+                 <td></td>
                  <td>@item.environment</td>
             </tr>
         </table>
-        <input type="submit" value="Update">
+        <input type="submit" value="Request to Update">
     }
 
-
-    @if (false) {
+    @if (Request.IsAuthenticated) {
         <!-- Form to submit new university info -->
-        using (Html.BeginForm("Login", "Login", FormMethod.Post))
-        {
+        using (Html.BeginForm("SingleUniversity", "University", item, FormMethod.Post))
+        {   
+            
             <div class="container">
-                <label for="fname">Funding Type</label>
-                <input type="text" id="fname" name="firstname" placeholder="ok">
+                <label for="fundingtype">Funding Type</label><br>
+                @Html.TextBoxFor(u => u.fundingtype, new { @class = "form-control", tabindex = 1 })        
+                <br>
 
-                <label for="lname">City</label>
-                <input type="text" id="lname" name="lastname" placeholder="Your last name..">
+                <label for="city">City</label><br>
+                @Html.TextBoxFor(u => u.city, new { @class = "form-control", tabindex = 2 })        
+                <br>
+            
+                <label for="state">State</label><br>
+                @Html.TextBoxFor(u => u.state, new { @class = "form-control", tabindex = 3 })        
+                <br>
 
-                <label for="country">State</label>
-                <select id="country" name="country">
-                    <option value="australia">Australia</option>
-                    <option value="canada">Canada</option>
-                    <option value="usa">USA</option>
-                </select>
+                <label for="environment">Environment</label><br>
+                @Html.TextBoxFor(u => u.environment, new { @class = "form-control", tabindex = 4 })        
+            
 
-                <label for="subject">Subject</label>
-                <textarea id="subject" name="subject" placeholder="Write something.." style="height:200px"></textarea>
-
+                <br>
                 <input type="submit" value="Submit">
             </div>
         }
