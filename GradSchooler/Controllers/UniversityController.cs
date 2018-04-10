@@ -75,7 +75,11 @@ namespace GradSchooler.Controllers
             //Debug.Write("University wanted to name: " + u.name);
             //Debug.WriteLine("The funding type: " + u.fundingtype);
 
+            s = "NULL";
+            String curEmail = User.Identity.Name;
+
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
+            db.addURequest(u, curEmail, s);
 
 
             return RedirectToAction("University", "University");

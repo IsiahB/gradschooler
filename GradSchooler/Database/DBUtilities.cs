@@ -356,7 +356,7 @@ namespace GradSchooler.DBUtilities
                                 catch(MySqlException e)
                                 {
                                     //catching exception - is there a better way?
-                                    //Debug.WriteLine("Problems with sql stuff, this is the problem:  " + e);
+                                    Debug.WriteLine("Problems with sql stuff, this is the problem:  " + e);
                                 }
                               
                             }
@@ -558,7 +558,7 @@ namespace GradSchooler.DBUtilities
             }
             catch (Exception e)
             {
-
+                Debug.WriteLine("SQL EXCEPTION: " + e);
             }
             finally
             {
@@ -606,6 +606,46 @@ namespace GradSchooler.DBUtilities
 
             return accFirstName;
         }
+
+        // Add a request made by the user
+        public Boolean addURequest(University uR, String email, string comment){
+            //insert into database
+            string sqlP = null;
+
+            try
+            {
+                if (conn.State != System.Data.ConnectionState.Open)
+                {
+                    conn.Close(); //just incase it is broken
+                    conn.Open(); //open the database connection
+                }//if
+
+                if (conn != null)
+                {
+                    sqlP = "INSERT INTO URequest " +
+                    "VALUES ('NULL', '" + email + "', '" + comment +
+                                           "', '" + uR.name + "', '" + uR.fundingtype + "', '" +
+                                           uR.city + "', '" + uR.state + "', '" + uR.environment + "')";
+
+                    MySqlCommand cmd2 = new MySqlCommand(sqlP, conn);
+
+                    cmd2.ExecuteNonQuery(); //to add the profile
+
+                    return true;
+                }
+
+            }
+            catch (MySqlException)
+            {
+                Console.Write("Invalid parameters for insertion" + "\n");
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+            
+        }//end addURequest
 
         /// <summary>
         /// close database
