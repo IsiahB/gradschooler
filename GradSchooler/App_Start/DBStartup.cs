@@ -9,7 +9,7 @@ namespace GradSchooler.App_Start {
         //USE THIS TO FILL THE DATABASE WITH STUFF
         //WILL ONLY BE CALLED ON STARUP
         public static void startUp() {
-            DBUtilities.DBUtilities.Instance.addUniversity(); //adds universities to the database
+            //DBUtilities.DBUtilities.Instance.addUniversity(); //adds universities to the database
         }//startup
     }//class
 }//namespace

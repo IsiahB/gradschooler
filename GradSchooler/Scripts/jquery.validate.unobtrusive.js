@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 /* NUGET: BEGIN LICENSE TEXT
  *
  * Microsoft grants you the right to use these script files for the sole
@@ -16,11 +17,31 @@
 ** Unobtrusive validation support library for jQuery and jQuery Validate
 ** Copyright (C) Microsoft Corporation. All rights reserved.
 */
+=======
+// Unobtrusive validation support library for jQuery and jQuery Validate
+// Copyright (C) Microsoft Corporation. All rights reserved.
+// @version v3.2.9
+>>>>>>> Stashed changes
 
 /*jslint white: true, browser: true, onevar: true, undef: true, nomen: true, eqeqeq: true, plusplus: true, bitwise: true, regexp: true, newcap: true, immed: true, strict: false */
 /*global document: false, jQuery: false */
 
+<<<<<<< Updated upstream
 (function ($) {
+=======
+(function (factory) {
+    if (typeof define === 'function' && define.amd) {
+        // AMD. Register as an anonymous module.
+        define("jquery.validate.unobtrusive", ['jquery.validation'], factory);
+    } else if (typeof module === 'object' && module.exports) {
+        // CommonJS-like environments that support module.exports     
+        module.exports = factory(require('jquery-validation'));
+    } else {
+        // Browser global
+        jQuery.validator.unobtrusive = factory(jQuery);
+    }
+}(function ($) {
+>>>>>>> Stashed changes
     var $jQval = $.validator,
         adapters,
         data_validation = "unobtrusiveValidation";
@@ -84,11 +105,20 @@
     }
 
     function onSuccess(error) {  // 'this' is the form element
+<<<<<<< Updated upstream
         var container = error.data("unobtrusiveContainer"),
             replaceAttrValue = container.attr("data-valmsg-replace"),
             replace = replaceAttrValue ? $.parseJSON(replaceAttrValue) : null;
 
         if (container) {
+=======
+        var container = error.data("unobtrusiveContainer");
+
+        if (container) {
+            var replaceAttrValue = container.attr("data-valmsg-replace"),
+                replace = replaceAttrValue ? $.parseJSON(replaceAttrValue) : null;
+
+>>>>>>> Stashed changes
             container.addClass("field-validation-valid").removeClass("field-validation-error");
             error.removeData("unobtrusiveContainer");
 
@@ -131,7 +161,11 @@
             execInContext = function (name, args) {
                 var func = defaultOptions[name];
                 func && $.isFunction(func) && func.apply(form, args);
+<<<<<<< Updated upstream
             }
+=======
+            };
+>>>>>>> Stashed changes
 
         if (!result) {
             result = {
@@ -422,8 +456,20 @@
             setValidationValues(options, "regex", options.params.regex);
         }
     });
+<<<<<<< Updated upstream
+=======
+    adapters.add("fileextensions", ["extensions"], function (options) {
+        setValidationValues(options, "extension", options.params.extensions);
+    });
+>>>>>>> Stashed changes
 
     $(function () {
         $jQval.unobtrusive.parse(document);
     });
+<<<<<<< Updated upstream
 }(jQuery));
+=======
+
+    return $jQval.unobtrusive;
+}));
+>>>>>>> Stashed changes
