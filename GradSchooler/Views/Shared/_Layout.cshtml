@@ -8,60 +8,42 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body>
-    <div class="navbar navbar-inverse navbar-fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                @Html.ActionLink("GradSchooler", "Index", "Home", new { area = "" }, new { @class = "navbar-brand" })
-            </div>
-            <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                    <li>@Html.ActionLink("UNIVERSITIES", "University", "University")</li>
-                    <li>@Html.ActionLink("PROGRAMS", "Program", "Program")</li>
-                    <li>@Html.ActionLink("GRE", "Index", "Home")</li>
-                    <!--<li>@Html.ActionLink("About", "About", "Home")</li>--->
-                </ul>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="@Url.Action("Index", "Home")">
+        GradSchooler
+      </a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
-                <ul class="nav navbar-nav">
-                    <!--When a user is logged in-->
-                    @if (Request.IsAuthenticated)
-                    {
-                        <li><a href="@Url.Action("Profiler", "Profiler")" class="btn" disabled> Hello,@Html.Encode(User.Identity.Name)   <i class="fas fa-user"></i></a>  </li>
-                        <li>@Html.ActionLink("LOGOUT", "Logout", "Login")</li>
-
-                        <li>@Html.ActionLink("PROFILE", "Profiler", "Profiler")</li>
-                        //Html.ActionLink("label name", "ActionResult method, "Controller name")
-                    }
-                    else
-                    {
-                        <!--When a user is logged out-->
-                        <li> <a href="@Url.Action("Login", "Login")" class="btn"> LOGIN <i class="fas fa-user"></i> </a></li>
-                        <li>@Html.ActionLink("CREATE ACCOUNT", "CreateAccountPage", "CreateAccount")</li>
-                        <!-- DROP DOWN FOR LOGGING IN
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fas fa-user"></i> LOGIN</a>
-                            <div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">
-                                <form method="post" action="Url.Action("Login", "LoginController")" accept-charset="UTF-8">
-                                    <input style="margin-bottom: 15px;" type="text" placeholder="Email" id="email" name="email">
-                                    <div class="form-group">
-                                        <label for="email">Email</label>
-
-                                    </div>
-                                    <input style="margin-bottom: 15px;" type="password" placeholder="Password" id="password" name="password">
-                                    <div class="form-group">
-                                        <label for="password">Password</label>
-                                    </div>
-                                    <input class="btn btn-primary btn-block" type="submit" id="sign-in" value="Sign in">
-                                </form>
-                                Html.ActionLink("Sign Up", "CreateAccountPage", "CreateAccount")
-                            </div>
-
-                        </li>
-                        -->
-                    }
-                </ul>
-            </div>
-        </div>
-    </div>
+      <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("University", "University")">Universities</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="@Url.Action("Program", "Program")">Programs</a>
+          </li>
+        </ul>
+        <ul class="navbar-nav ml-auto">
+          @if(Request.IsAuthenticated){
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Profiler", "Profiler")"><i class="fas fa-user"></i> Profile</a>
+            </li>        
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Logout", "Login")">Logout</a>
+            </li>
+          }else{
+            <li class="nav-item">
+                <a class="nav-link" href="@Url.Action("Login", "Login")"><i class="fas fa-user"></i>Login</a>
+            </li>
+            <li>
+               <a class="nav-link" href="@Url.Action("CreateAccountPage", "CreateAccount")">Create Account</a>
+            </li>
+          }
+        </ul>
+      </div>
+    </nav>
 
     <div class="container body-content">
         @RenderBody()

@@ -1,6 +1,5 @@
 ﻿body {
-    padding-top: 50px;
-    padding-bottom: 20px;
+    padding-bottom: 10px;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -23,26 +22,17 @@ textarea {
     max-width: 280px;
 }
 
-.navbar-inverse {
-    background-color: aliceblue;
-    border-color: transparent;
-}
 
 /*This changes the GradSchooler title color, seperate from navbar*/
 .navbar-brand:visited {
     color: black;
 }
 
-.navbar-inverse .navbar-nav > li > a {
-    color: black;
-}
-
 .jumbotron {
-    background-color: honeydew;
+    background-color: powderblue;
     background-size: cover;
     background-repeat: no-repeat;
     color: black;
-    /*text-shadow: b 0.9em 0.3em 0.3em*/ /
 }
 
 
