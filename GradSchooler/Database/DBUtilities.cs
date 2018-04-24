@@ -381,7 +381,7 @@ namespace GradSchooler.DBUtilities
 
         public Boolean UniversityPopulated()
         {
-            if(displayUniversities().Count == 0) { return false; }
+            if(getUniversities().Count == 0) { return false; }
             return true;
 
         }
@@ -390,7 +390,7 @@ namespace GradSchooler.DBUtilities
 
 
         // - getUniversityList
-        public List<University> displayUniversities()
+        public List<University> getUniversities()
         {
             List<University> unis = new List<University>();
 
@@ -438,7 +438,7 @@ namespace GradSchooler.DBUtilities
             return unis;
         }
 
-        public Program[] displayPrograms(Program[] pros)
+        public List<Program> getPrograms(List<Program> pros)
         {
             string sql = null;
             try
@@ -457,22 +457,22 @@ namespace GradSchooler.DBUtilities
                     MySqlCommand command = new MySqlCommand(sql, conn);
                     using (reader = command.ExecuteReader())
                     {
-                        int i = 0;
-                        while (reader.Read() && i < pros.Length)
+                        while (reader.Read())
                         {
                             Program p = new Program
                             {
-                                programname = (string)reader["programname"],
-                                degree = (string)reader["degree"],
-                                acceptancerate = (float)reader["acceptancerate"],
-                                instatetuition = (float)reader["instatetuition"],
-                                outstatetuition = (float)reader["outstatetuition"],
-                                fee = (float)reader["fee"],
-                                deadline = (string)reader["deadline"],
-                                schoolname = (string)reader["schoolname"]
+                                programname = (string)reader["programname"] //,
+                                //degree = (string)reader["degree"],
+                                //acceptancerate = (float)reader["acceptancerate"],
+                                //instatetuition = (float)reader["instatetuition"],
+                                //outstatetuition = (float)reader["outstatetuition"],
+                                //fee = (float)reader["fee"],
+                                //deadline = (string)reader["deadline"],
+                                //schoolname = (string)reader["schoolname"],
+                                //city = (string)reader["city"], //this need to be nulls
+                                //state = (string)reader["state"]
                             };
-                            pros[i] = p;
-                            i++;
+                            pros.Add(p);
                         }
                     }
                 }

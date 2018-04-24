@@ -4,6 +4,8 @@ namespace GradSchooler.Models
     public class Program
     {
         public string programname { get; set; }
+        public string city { get; set; }
+        public string state { get; set; }
         public string degree { get; set; }
         public double acceptancerate { get; set; }
         public float instatetuition { get; set; }

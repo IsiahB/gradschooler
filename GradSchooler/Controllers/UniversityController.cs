@@ -22,7 +22,7 @@ namespace GradSchooler.Controllers
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
             List <University> univs = new List<University>();
 
-            univs = db.displayUniversities();
+            univs = db.getUniversities();
             ViewData["unis"] = univs;
 
             return View(); //automatically returns the University View

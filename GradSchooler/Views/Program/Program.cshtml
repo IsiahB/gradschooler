@@ -39,25 +39,17 @@
     <table>
         <tr>
             <th>Program Name</th>
-            <th>Degree</th>
-            <th>Acceptance Rate</th>
-            <th>In state Tuition</th>
-            <th>Out of State Tuition</th>
-            <th>Application Fee</th>
-            <th>Application Deadline</th>
-            <th>University Name</th>
+            <th>School Name</th>
+            <th>City</th>
+            <th>State</th>
         </tr>
         @foreach (var item in progs)
         {
             <tr>
                 <td>@item.programname</td>
-                <td>@item.degree</td>
-                <td>@item.acceptancerate%</td>
-                <td>$@item.instatetuition</td>
-                <td>$@item.outstatetuition</td>
-                <td>$@item.fee</td>
-                <td>@item.deadline</td>
                 <td>@item.schoolname</td>
+                <td>@item.city</td>
+                <td>$@item.state</td>
             </tr>
         }
     </table>

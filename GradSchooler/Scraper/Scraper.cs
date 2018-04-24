@@ -58,7 +58,7 @@ namespace GradSchooler
         {
             //get the university state, name and city
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
-            List<University> unis = db.displayUniversities();
+            List<University> unis = db.getUniversities();
 
             string s = "";
             foreach (var u in unis)

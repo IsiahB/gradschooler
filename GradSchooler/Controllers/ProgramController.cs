@@ -15,9 +15,8 @@ namespace GradSchooler.Controllers
             ViewBag.Message = "Program Page";
 
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
-            int size = db.tableSizes("Program");
-            Program[] progs = new Program[size];
-            progs = db.displayPrograms(progs);
+            List<Program> progs = new List<Program>();
+            progs = db.getPrograms(progs);
             ViewData["programs"] = progs;
 
 

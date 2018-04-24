@@ -8,6 +8,8 @@ namespace GradSchooler.Models
         public string city { get; set; }
         public string state { get; set; }
         public string environment { get; set; }
+        public string url { get; set; }
+        public string address { get; set; }
 
     }
 }
