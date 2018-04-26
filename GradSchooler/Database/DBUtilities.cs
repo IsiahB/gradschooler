@@ -319,9 +319,9 @@ namespace GradSchooler.DBUtilities
             string itemD = "";
             cmd.Parameters.AddWithValue("@name", elD);
             cmd.Parameters.AddWithValue("@fundingtype", "Private");
-            cmd.Parameters.AddWithValue("@city", "n/a");
+            cmd.Parameters.AddWithValue("@city", "unknown");
             cmd.Parameters.AddWithValue("@state", itemD);
-            cmd.Parameters.AddWithValue("@environment", "n/a");
+            cmd.Parameters.AddWithValue("@environment", "unknown");
             cmd.Parameters.AddWithValue("@uniURL", "");
             cmd.Parameters.AddWithValue("@address", "");
 
@@ -404,7 +404,7 @@ namespace GradSchooler.DBUtilities
                 if(conn != null)
                 {
                     MySqlDataReader reader = null;
-                    sql = "SELECT name, fundingtype, city, state, environment " +
+                    sql = "SELECT * " +
                         "FROM University ";
                     MySqlCommand command = new MySqlCommand(sql, conn);
                     using (reader = command.ExecuteReader())
@@ -417,7 +417,8 @@ namespace GradSchooler.DBUtilities
                                 fundingtype = (string)reader["fundingtype"],
                                 city = (string)reader["city"],
                                 state = (string)reader["state"],
-                                environment = (string)reader["environment"]
+                                environment = (string)reader["environment"],
+                                url = (string)reader["uniURL"]
                             };
 
                             unis.Add(u);  

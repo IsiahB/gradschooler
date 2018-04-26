@@ -41,7 +41,7 @@
                     <th>Funding</th>
                     <th>City</th>
                     <th>State</th>
-                    <th>Environment</th>
+                    <th>University URL</th>
                 </tr>
                 @foreach (var item in unis)
                 {
@@ -51,7 +51,7 @@
                         <td>@item.fundingtype</td>
                         <td>@item.city</td>
                         <td>@item.state</td>
-                        <td>@item.environment</td>
+                        <td>@item.url</td>
                     </tr>
                 }
             </table>
@@ -67,16 +67,17 @@
                 <th>Funding</th>
                 <th>City</th>
                 <th>State</th>
-                <th>Environment</th>
+                <th>University URL</th>
             </tr>
             @foreach (var item in unis)
-                {
+            {
+                String url = (item.url).ToLower();
                 <tr>
                     <td><a href = "@Url.Action("SingleUniversity", "University", item)">@item.name</a></td>
                     <td>@item.fundingtype</td>
                     <td>@item.city</td>
                     <td>@item.state</td>
-                    <td>@item.environment</td>
+                    <td>@url<td>
                 </tr>
             }
         </table>
