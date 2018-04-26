@@ -381,16 +381,14 @@ namespace GradSchooler.DBUtilities
 
         public Boolean UniversityPopulated()
         {
-            if(displayUniversities().Count == 0) { return false; }
+            if(getUniversities().Count == 0) { return false; }
             return true;
 
         }
 
 
-
-
         // - getUniversityList
-        public List<University> displayUniversities()
+        public List<University> getUniversities()
         {
             List<University> unis = new List<University>();
 
