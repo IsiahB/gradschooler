@@ -461,13 +461,15 @@ namespace GradSchooler.DBUtilities
                             Program p = new Program
                             {
                                 programname = (string)reader["programname"],
-                                degree = (string)reader["degree"],
-                                acceptancerate = (float)reader["acceptancerate"],
-                                instatetuition = (float)reader["instatetuition"],
-                                outstatetuition = (float)reader["outstatetuition"],
-                                fee = (float)reader["fee"],
-                                deadline = (string)reader["deadline"],
-                                schoolname = (string)reader["schoolname"]
+                                //degree = (string)reader["degree"],
+                                //acceptancerate = (float)reader["acceptancerate"],
+                                //instatetuition = (float)reader["instatetuition"],
+                                //outstatetuition = (float)reader["outstatetuition"],
+                                //fee = (float)reader["fee"],
+                                //deadline = (string)reader["deadline"],
+                                schoolname = (string)reader["schoolname"],
+                                city = (string)reader["city"],
+                                state = (string)reader["state"]
                             };
                             pros.Add(p);
                         }
