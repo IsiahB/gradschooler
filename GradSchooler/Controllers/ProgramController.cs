@@ -16,7 +16,7 @@ namespace GradSchooler.Controllers
 
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
             List<Program> progs = new List<Program>();
-            progs = db.getPrograms(progs);
+            progs = db.getPrograms();
             ViewData["programs"] = progs;
 
 
