@@ -391,12 +391,14 @@ namespace GradSchooler.DBUtilities
                             Program p = new Program
                             {
                                 programname = (string)reader["programname"],
-                                degree = (string)reader["degree"],
-                                acceptancerate = (float)reader["acceptancerate"],
-                                instatetuition = (float)reader["instatetuition"],
-                                outstatetuition = (float)reader["outstatetuition"],
-                                fee = (float)reader["fee"],
-                                deadline = (string)reader["deadline"],
+                                city = (string)reader["city"],
+                                state = (string)reader["state"],
+                                //degree = (string)reader["degree"],
+                                //acceptancerate = (float)reader["acceptancerate"],
+                                //instatetuition = (float)reader["instatetuition"],
+                                //outstatetuition = (float)reader["outstatetuition"],
+                                //fee = (float)reader["fee"],
+                                //deadline = (string)reader["deadline"],
                                 schoolname = (string)reader["schoolname"]
                             };
                             pros.Add(p);
@@ -413,7 +415,6 @@ namespace GradSchooler.DBUtilities
                 conn.Close();
             }
             return pros;
-
         }
 
 

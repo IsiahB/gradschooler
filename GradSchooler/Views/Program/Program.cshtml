@@ -1,12 +1,6 @@
 ﻿@{
     ViewBag.Title = "Program";
     var progs = ViewBag.programs;
-
-    //better way??????????????? help
-    foreach (var thing in progs)
-    {
-        thing.acceptancerate = (int)(thing.acceptancerate * 100);
-    }
 }
 
 <!DOCTYPE html>
@@ -14,26 +8,8 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - GradSchooler</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
 </head>
 <body>
     <table>

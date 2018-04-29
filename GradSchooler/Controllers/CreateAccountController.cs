@@ -27,14 +27,13 @@ namespace GradSchooler.Controllers
         /// <returns>The account page.</returns>
         public ActionResult CreateAccountPage()
         {
-           // CreateAccountForm(); // load empty form
             ViewBag.Title = "Account Creation Page";
             //create Account model
             Account a = new Account();
             Profile p = new Profile();
             //get user response
             Console.Write(Request.HttpMethod);
-            if (Request.HttpMethod == "POST") //print out to make sure if uses all caps
+            if (Request.HttpMethod == "POST")
             {
                 a.email = Request.Form["email"];
                 a.password = Request.Form["password"];

@@ -14,24 +14,29 @@
             <div class="card-header"></div>
             <div class="card-body">
                 <div class="form-group">
-                    <label for="username">Email</label><br/>
+                    <label for="username">Email *</label><br/>
                     <input type="text" name="email" value="@Request.Form["email"]">
+                    <br/>
                 </div>
                 <div class="form-group">
-                    <label for="password">Password</label>
+                    <label for="password">Password *</label>
                     <input type="text" name="password" value="@Request.Form["password"]">
+                    <br/>
                 </div>
                 <div class="form-group">
                     <label for="username">First name</label>
-                    <input type="text" name="firstName" value="@Request.Form["firstName"]">
+                    <input type="text" name="firstName" value="@Request.Form["firstName"]" placeholder="Jane">
+                    <br/>
                 </div>
                 <div class="form-group">
                     <label for="username">Last name</label>
-                    <input type="text" name="lastName" value="@Request.Form["lastName"]">
+                    <input type="text" name="lastName" value="@Request.Form["lastName"]" placeholder="Doe">
+                    <br/>
                 </div>
                 <div class="form-group">
                     <label for="password">Birthday</label>
                     <input type="text" name="birthday" value="@Request.Form["birthday"]">
+                    <small id="dobHelp" class="form-text text-muted">(YYYY-MM-DD)</small>
                 </div>
                 <input type="submit" value="Create" class="btn btn-dark btn-block mt-3"/>
            </div>

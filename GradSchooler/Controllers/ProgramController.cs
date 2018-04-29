@@ -18,8 +18,6 @@ namespace GradSchooler.Controllers
             List<Program> progs = new List<Program>();
             progs = db.getPrograms();
             ViewData["programs"] = progs;
-
-
             return View();
         }
     }
