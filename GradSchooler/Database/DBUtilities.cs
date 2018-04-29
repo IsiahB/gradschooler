@@ -309,7 +309,12 @@ namespace GradSchooler.DBUtilities
             return true;
         }
 
-        // - getUniversityList
+        /// <summary>
+        /// Gets a list of universities.
+        /// </summary>
+        /// <returns>The universities in a List.</returns>
+        /// <param name="keyword">Keyword.</param>
+        /// <param name="searchType">Search type.</param>
         public List<University> getUniversities(String keyword, String searchType)
         {
             List<University> unis = new List<University>();
@@ -364,9 +369,15 @@ namespace GradSchooler.DBUtilities
                 conn.Close();
             }
             return unis;
-        }
+        }//end getUniversities
 
-        public List<Program> getPrograms()
+        /// <summary>
+        /// Gets a list of programs.
+        /// </summary>
+        /// <returns>The programs in a List.</returns>
+        /// <param name="keyword">Keyword.</param>
+        /// <param name="searchType">Search type.</param>
+        public List<Program> getPrograms(string keyword, string searchType)
         {
             List<Program> pros = new List<Program>();
             string sql = null;
@@ -381,8 +392,17 @@ namespace GradSchooler.DBUtilities
                 if(conn != null)
                 {
                     MySqlDataReader reader = null;
-                    sql = "SELECT * " +
+                    if (keyword == "")
+                    {
+                        sql = "SELECT * " +
                         "FROM Program ";
+                    }
+                    else
+                    {
+                        sql = "SELECT programname, city, state, schoolname " +
+                            "FROM Program " +
+                            "WHERE " + searchType + " LIKE '%" + keyword + "%' ";
+                    }
                     MySqlCommand command = new MySqlCommand(sql, conn);
                     using (reader = command.ExecuteReader())
                     {
@@ -415,7 +435,7 @@ namespace GradSchooler.DBUtilities
                 conn.Close();
             }
             return pros;
-        }
+        }//end getPrograms
 
 
 

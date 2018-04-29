@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Program";
     var progs = ViewBag.programs;
+    var search = "";
 }
 
 <!DOCTYPE html>
@@ -10,24 +11,54 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/custom")
+
 </head>
 <body>
-    <table>
-        <tr>
-            <th>Program Name</th>
-            <th>School Name</th>
-            <th>City</th>
-            <th>State</th>
-        </tr>
-        @foreach (var item in progs)
-        {
-            <tr>
-                <td>@item.programname</td>
-                <td>@item.schoolname</td>
-                <td>@item.city</td>
-                <td>@item.state</td>
-            </tr>
-        }
-    </table>
+    <div class="table-responsive">
+        <table class="table">
+             <tr>
+                <th>
+                  @using (Html.BeginForm("Program", "Program", search, FormMethod.Post))
+                  {
+                    <input type="text" class="form-control" name="name" placeholder="Program" value="">
+                  }      
+                </th>
+                <th>
+                  @using (Html.BeginForm("Program", "Program", search, FormMethod.Post))
+                  {
+                    <input type="text" class="form-control" name="institution" placeholder="Institution" value="">
+                  }      
+                </th>
+                <th>
+                  @using (Html.BeginForm("Program", "Program", search, FormMethod.Post))
+                  {
+                    <input type="text" class="form-control" name="city" placeholder="City" value="">
+                  }       
+                </th>
+                <th>
+                  @using (Html.BeginForm("Program", "Program", search, FormMethod.Post))
+                  {
+                    <input type="text" class="form-control" name="state" placeholder="State" value="">
+                  }       
+                </th>        
+              </tr>
+              <tr>
+                <th>Program</th>
+                <th>Institution</th>
+                <th>City</th>
+                <th>State</th>
+              </tr>
+            @foreach (var item in progs)
+            {
+                <tr>
+                    <td>@item.programname</td>
+                    <td>@item.schoolname</td>
+                    <td>@item.city</td>
+                    <td>@item.state</td>
+                </tr>
+            }
+        </table>
+    </div>
 </body>
 </html>
