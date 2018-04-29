@@ -15,7 +15,9 @@
    
 </head>
 <body>
-    <h3>University Information</h3>
+    <div class="container">
+    <p class="lead"><h3>University Information</h3></p>
+    </div>
 
     <!-- diaplay university information -->
     @using (Html.BeginForm("SingleUniversity", "University", FormMethod.Post))
@@ -23,13 +25,9 @@
         <table class="table">
             <tr>
                 <th>Name</th>
-
                 <th>Website</th>
-
                 <th>City</th>
-
                 <th>State</th>
-
                 <th>Environment</th>
             </tr>
             <tr>

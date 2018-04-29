@@ -26,15 +26,16 @@ textarea {
 /*This changes the GradSchooler title color, seperate from navbar*/
 .navbar-brand:visited {
     color: black;
-    background-color: pink;
 }
 
-.jumbotron {
-    background-color: powderblue;
+.jumbotron jumbotron-fluid {
+    background-image: url(‘https://pmcdeadline2.files.wordpress.com/2015/08/scooby-doo.jpg?crop=193px%2C0px%2C707px%2C474px&resize=446%2C299’);
     background-size: cover;
     background-repeat: no-repeat;
+    background-color: pink;
     color: black;
 }
+
 
 
 
