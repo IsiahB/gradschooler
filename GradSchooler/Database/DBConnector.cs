@@ -32,8 +32,8 @@ namespace GradSchooler.Database{
             {
                 MySqlConnectionStringBuilder conn_string = new MySqlConnectionStringBuilder
                 {
-                    //Port = port,
-                    Server = server,
+                    Port = port,
+                    Server = serverlocal,
                     UserID = userID,
                     Password = password,
                     Database = database

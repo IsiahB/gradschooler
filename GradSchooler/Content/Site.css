@@ -26,6 +26,7 @@ textarea {
 /*This changes the GradSchooler title color, seperate from navbar*/
 .navbar-brand:visited {
     color: black;
+    background-color: pink;
 }
 
 .jumbotron {
@@ -34,6 +35,8 @@ textarea {
     background-repeat: no-repeat;
     color: black;
 }
+
+
 
 
 

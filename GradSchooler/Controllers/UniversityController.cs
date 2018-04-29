@@ -11,6 +11,10 @@ namespace GradSchooler.Controllers
 {
     public class UniversityController : Controller
     {
+        /// <summary>
+        /// Default method that displays all universities when university page is accessed
+        /// </summary>
+        /// <returns>The university.</returns>
         [HttpGet]
         public ActionResult University()
         {
@@ -22,11 +26,30 @@ namespace GradSchooler.Controllers
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
             List <University> univs = new List<University>();
 
-            univs = db.getUniversities();
+            univs = db.getUniversities("");
             ViewData["unis"] = univs;
 
             return View(); //automatically returns the University View
         }//end of get method
+
+        /// <summary>
+        /// Called when a user is searching for a specific university
+        /// by entering a search keyword
+        /// </summary>
+        [HttpPost]
+        public ActionResult University(String keyword){
+            keyword = Request["s"];
+
+            ViewBag.Message = "University Page";
+
+            DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
+            List<University> univs = new List<University>();
+
+            univs = db.getUniversities(keyword);
+            ViewData["unis"] = univs;
+
+            return View();
+        }
 
         [HttpPost]
         public ActionResult FavoriteUniversity()
@@ -48,7 +71,7 @@ namespace GradSchooler.Controllers
                         String[] values = s.Split(',');
                         foreach(var item in values)
                         {
-                            db.addFavUniversity(curEmail, item); //add favUni to database;
+                            db.addFavUniversity(curEmail, item); //add favUni to database
                         }//end foreach
                     }//end if
                 }//end foreach
@@ -72,8 +95,6 @@ namespace GradSchooler.Controllers
 
         [HttpPost]
         public ActionResult SingleUniversity(University u, string s){
-            //Debug.Write("University wanted to name: " + u.name);
-            //Debug.WriteLine("The funding type: " + u.fundingtype);
 
             s = "NULL";
             String curEmail = User.Identity.Name;

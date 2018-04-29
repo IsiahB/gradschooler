@@ -319,9 +319,9 @@ namespace GradSchooler.DBUtilities
             string itemD = "";
             cmd.Parameters.AddWithValue("@name", elD);
             cmd.Parameters.AddWithValue("@fundingtype", "Private");
-            cmd.Parameters.AddWithValue("@city", "unknown");
+            cmd.Parameters.AddWithValue("@city", "n/a");
             cmd.Parameters.AddWithValue("@state", itemD);
-            cmd.Parameters.AddWithValue("@environment", "unknown");
+            cmd.Parameters.AddWithValue("@environment", "n/a");
             cmd.Parameters.AddWithValue("@uniURL", "");
             cmd.Parameters.AddWithValue("@address", "");
 
@@ -381,14 +381,16 @@ namespace GradSchooler.DBUtilities
 
         public Boolean UniversityPopulated()
         {
-            if(getUniversities().Count == 0) { return false; }
+            if(getUniversities("").Count == 0) { return false; }
             return true;
 
         }
 
 
+
+
         // - getUniversityList
-        public List<University> getUniversities()
+        public List<University> getUniversities(String s)
         {
             List<University> unis = new List<University>();
 
@@ -404,8 +406,15 @@ namespace GradSchooler.DBUtilities
                 if(conn != null)
                 {
                     MySqlDataReader reader = null;
-                    sql = "SELECT * " +
-                        "FROM University ";
+                    if (s == "")
+                    {
+                        sql = "SELECT name, fundingtype, city, state, environment, uniURL " +
+                            "FROM University ";
+                    }else{
+                        sql = "SELECT name, fundingtype, city, state, environment, uniURL " +
+                            "FROM University " +
+                            "WHERE * LIKE '%" + s + "%' ";
+                    }
                     MySqlCommand command = new MySqlCommand(sql, conn);
                     using (reader = command.ExecuteReader())
                     {
@@ -462,15 +471,13 @@ namespace GradSchooler.DBUtilities
                             Program p = new Program
                             {
                                 programname = (string)reader["programname"],
-                                //degree = (string)reader["degree"],
-                                //acceptancerate = (float)reader["acceptancerate"],
-                                //instatetuition = (float)reader["instatetuition"],
-                                //outstatetuition = (float)reader["outstatetuition"],
-                                //fee = (float)reader["fee"],
-                                //deadline = (string)reader["deadline"],
-                                schoolname = (string)reader["schoolname"],
-                                city = (string)reader["city"],
-                                state = (string)reader["state"]
+                                degree = (string)reader["degree"],
+                                acceptancerate = (float)reader["acceptancerate"],
+                                instatetuition = (float)reader["instatetuition"],
+                                outstatetuition = (float)reader["outstatetuition"],
+                                fee = (float)reader["fee"],
+                                deadline = (string)reader["deadline"],
+                                schoolname = (string)reader["schoolname"]
                             };
                             pros.Add(p);
                         }
@@ -489,42 +496,7 @@ namespace GradSchooler.DBUtilities
 
         }
 
-        public int tableSizes(string tablename)
-        {
-            string sql = null;
-            int size = 0;
 
-            try
-            {
-                if (conn.State != System.Data.ConnectionState.Open)
-                {
-                    conn.Close(); //just incase it is broken
-                    conn.Open(); //open the database connection
-                }//if
-
-                if(conn != null)
-                {
-                    sql = "SELECT COUNT(*) " +
-                    "FROM " + tablename;
-
-                    using (MySqlCommand cmd = new MySqlCommand(sql, conn))
-                    {
-                        size = Convert.ToInt32(cmd.ExecuteScalar());
-                        //ExecuteScalar returns the first column of the first row in the table
-                    }
-                }  
-            }
-            catch (MySqlException e)
-            {
-                Console.Write(e);
-            }
-            finally
-            {
-                conn.Close();
-            }
-
-            return size;
-        }
 
         //method to login
         public bool loginChecker(String email, String password)

@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "University";
     var unis = ViewBag.unis;
+    string search = "";
 }
 
 <!DOCTYPE html>
@@ -11,77 +12,67 @@
     <title>@ViewBag.Title - GradSchooler</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-    <style>
-        table {
-            font-family: arial, sans-serif;
-            border-collapse: collapse;
-            width: 100%;
-        }
-
-        td, th {
-            border: 1px solid #dddddd;
-            text-align: left;
-            padding: 8px;
-        }
-
-        tr:nth-child(even) {
-            background-color: #dddddd;
-        }
-    </style>
 </head>
 <body>
-    @if (Request.IsAuthenticated)
-    {
-        using (Html.BeginForm("FavoriteUniversity", "University", FormMethod.Post))
-        {
-            <table>
-                <tr>
-                    <th></th>
-                    <th>University</th>
-                    <th>Funding</th>
-                    <th>City</th>
-                    <th>State</th>
-                    <th>University URL</th>
-                </tr>
-                @foreach (var item in unis)
-                {
-                    <tr>
-                        <td><input type="checkbox" name="favUnis" value="@item.name" /></td>
-                        <td><a href = "@Url.Action("SingleUniversity", "University", item)">@item.name</a></td>
-                        <td>@item.fundingtype</td>
-                        <td>@item.city</td>
-                        <td>@item.state</td>
-                        <td>@item.url</td>
-                    </tr>
-                }
-            </table>
-            <br>
-            <input type="submit" value="Favorite">
-        }
-    }
-    else
-    {
-        <table>
-            <tr>
-                <th>University</th>
-                <th>Funding</th>
-                <th>City</th>
-                <th>State</th>
-                <th>University URL</th>
-            </tr>
-            @foreach (var item in unis)
-            {
-                String url = (item.url).ToLower();
-                <tr>
-                    <td><a href = "@Url.Action("SingleUniversity", "University", item)">@item.name</a></td>
-                    <td>@item.fundingtype</td>
-                    <td>@item.city</td>
-                    <td>@item.state</td>
-                    <td>@url<td>
-                </tr>
-            }
-        </table>
-    }
+            <div class="table-responsive">          
+                <table class="table">
+                    <thead>
+                        <tr>
+                            @if(Request.IsAuthenticated){<th></th>}
+                            <th>University</th>
+                            <th>City</th>
+                            <th>State</th>
+                            <th>University URL</th>        
+                        </tr>
+                        <tr>
+                            @if(Request.IsAuthenticated){<th></th>}
+                            <th>
+                                @using (Html.BeginForm("University", "University", search, FormMethod.Post))
+                                {
+                                    <input type="text" class="form-control" name="s" placeholder="Search.." value="">
+                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                }
+                            </th>
+                            <th>
+                                @using (Html.BeginForm("University", "University", search, FormMethod.Post))
+                                {
+                                    <input type="text" name="s" placeholder="Search.." value="">
+                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                }
+                            </th>
+                            <th>
+                                @using (Html.BeginForm("University", "University", search, FormMethod.Post))
+                                {
+                                    <input type="text" name="s" placeholder="Search.." value="">
+                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                }
+                            </th>
+                            <th>
+                                @using (Html.BeginForm("University", "University", search, FormMethod.Post))
+                                {
+                                    <input type="text" name="s" placeholder="Search.." value="">
+                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                }
+                            </th>
+                        </tr>
+                      </thead>
+                        @foreach (var item in unis)
+                        {
+                            String url = (item.url).ToLower();
+                       <tbody>
+                            <tr>
+                                @if(Request.IsAuthenticated){<td><input type="checkbox" name="favUnis" value="@item.name" /></td>}
+                                <td><a href = "@Url.Action("SingleUniversity", "University", item)">@item.name</a></td>
+                                <td>@item.city</td>
+                                <td>@item.state</td>
+                                <td><a href="http://@url">@url</a></td>
+                            </tr>
+                        </tbody>
+                        }     
+                </table>
+             </div>
+             <br>
+             @if(Request.IsAuthenticated){<input type="submit" value="Favorite">}
     
 </body>
 </html>
