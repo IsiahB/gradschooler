@@ -3,6 +3,7 @@
     ViewBag.Title = "Logging in";
 }
 
+
 @using (Html.BeginForm("Login", "Login", FormMethod.Post))
 {
 
@@ -12,6 +13,7 @@
             <div class="card-body">
                 <div class="form-group">
                     <label for="username">Email</label>
+           
                     @Html.TextBoxFor(a => a.email, new { @class = "form-control", placeholder = "Email", tabindex = 1 })
                     @Html.ValidationMessageFor(a => a.email)
                 </div>

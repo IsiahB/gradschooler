@@ -12,41 +12,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>University Information</title>
-    <style>
-        body {
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        input[type=text], select, textarea {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            box-sizing: border-box;
-            margin-top: 6px;
-            margin-bottom: 16px;
-            resize: vertical;
-        }
-
-        input[type=submit] {
-            background-color: #4CAF50;
-            color: white;
-            padding: 4px 8px;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-            input[type=submit]:hover {
-                background-color: #45a049;
-            }
-
-        .container {
-            border-radius: 5px;
-
-            padding: 20px;
-        }
-    </style>
+   
 </head>
 <body>
     <h3>University Information</h3>
@@ -54,31 +20,27 @@
     <!-- diaplay university information -->
     @using (Html.BeginForm("SingleUniversity", "University", FormMethod.Post))
     {
-        <table>
+        <table class="table">
             <tr>
-                <th>University</th>
-                <th><input type="checkbox" name="funding" value="@item.fundingtype" /></th>
-                <th>Funding</th>
-                <th><input type="checkbox" name="city" value="@item.city" /></th>
+                <th>Name</th>
+
+                <th>Website</th>
+
                 <th>City</th>
-                <th><input type="checkbox" name="state" value="@item.state" /></th>
+
                 <th>State</th>
-                <th><input type="checkbox" name="environment" value="@item.environment" /></th>
+
                 <th>Environment</th>
             </tr>
             <tr>
                  <td>@item.name</td>
-                 <td></td>
-                 <td>@item.fundingtype</td>
-                 <td></td>
+                 <td><a href="http://@item.url">@item.url</a></td>
                  <td>@item.city</td>
-                 <td></td>
                  <td>@item.state</td>
-                 <td></td>
                  <td>@item.environment</td>
             </tr>
         </table>
-        <input type="submit" value="Request to Update">
+        <br/>
     }
 
     @if (Request.IsAuthenticated) {
@@ -104,9 +66,19 @@
             
 
                 <br>
-                <input type="submit" value="Submit">
+                <input type="submit" class="btn btn-primary" value="Submit">
             </div>
         }
+    }else{
+        <div class="card text-center border-dark mb-3">
+            <div class="card-header">
+                <h4>Sign in to contibute to GradSchooler's information!</h4>
+            </div>
+            <div class="card-body">
+                <a href="@Url.Action("Login", "Login")" class="btn btn-primary">Sign In</a>
+                <a href="@Url.Action("CreateAccountPage", "CreateAccount")" class="btn btn-primary">Create an Account</a> 
+            </div>
+        </div>
     }
 
 </body>

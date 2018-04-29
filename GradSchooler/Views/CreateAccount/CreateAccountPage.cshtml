@@ -7,34 +7,36 @@
     ViewBag.Title = "Account Creation Page";
 }
 
-<!DOCTYPE html>
-<html>
-<head>
-    <meta name="viewport" content="width=device-width" />
-    <title>@ViewBag.Title - GradSchooler</title>
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/modernizr")
-</head>
-<body>
-    <form method="post">
-        Email*:<br>
-        <input type="text" name="email" value="@Request.Form["email"]">
-        <br>
-        Password*:<br>
-        <input type="password" name="password" value="@Request.Form["password"]">
-        <br>
-        First name:<br>
-        <input type="text" name="firstName" value="@Request.Form["firstName"]">
-        <br>
-        Last name:<br>
-        <input type="text" name="lastName" value="@Request.Form["lastName"]">
-        <br>
-        Date of Birth(yyyy-mm-dd):<br>
-        <input type="text" name="birthday" value="@Request.Form["birthday"]">
-        <br><br>
-        <input type="submit" value="Create">
-    </form>
+@using (Html.BeginForm("CreateAccountPage", "CreateAccount", FormMethod.Post))
+{
+    <div class="container">
+        <div class="card mx-auto mt-5 w-25">
+            <div class="card-header"></div>
+            <div class="card-body">
+                <div class="form-group">
+                    <label for="username">Email</label><br/>
+                    <input type="text" name="email" value="@Request.Form["email"]">
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="text" name="password" value="@Request.Form["password"]">
+                </div>
+                <div class="form-group">
+                    <label for="username">First name</label>
+                    <input type="text" name="firstName" value="@Request.Form["firstName"]">
+                </div>
+                <div class="form-group">
+                    <label for="username">Last name</label>
+                    <input type="text" name="lastName" value="@Request.Form["lastName"]">
+                </div>
+                <div class="form-group">
+                    <label for="password">Birthday</label>
+                    <input type="text" name="birthday" value="@Request.Form["birthday"]">
+                </div>
+                <input type="submit" value="Create" class="btn btn-dark btn-block mt-3"/>
+           </div>
+        </div>
+    </div>
 
-    <p>If you click the "Create" button, an account will be created.</p>
-</body>
-</html>
+}
+
