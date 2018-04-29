@@ -29,11 +29,18 @@ textarea {
 }
 
 .jumbotron jumbotron-fluid {
-    background-image: url(‘https://pmcdeadline2.files.wordpress.com/2015/08/scooby-doo.jpg?crop=193px%2C0px%2C707px%2C474px&resize=446%2C299’);
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: pink;
+    background-color: powderblue;
     color: black;
+}
+
+.card-img-bottom {
+    color: #fff;
+    height: 20rem;
+    background: url(/Media/books.jpg) center no-repeat;
+    background-size: cover;
+
 }
 
 

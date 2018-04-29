@@ -49,7 +49,7 @@
         @RenderBody()
         <hr />
         <footer>
-            <p>&copy; @DateTime.Now.Year - GradSchooler</p>
+            <p>&copy; @DateTime.Now.Year - GradSchooler - <a href="@Url.Action("About", "Home")">About</a></p>
         </footer>
     </div>
     @Scripts.Render("https://use.fontawesome.com/releases/v5.0.6/js/all.js")

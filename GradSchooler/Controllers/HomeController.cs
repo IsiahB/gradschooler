@@ -12,17 +12,13 @@ namespace GradSchooler.Controllers
     {
         public ActionResult Index()
         {
-            //var client = new HttpClient();
-            //var response = client.GetAsync("http://localhost:52473/api/team").Result;
-            //var products = response.Content.ReadAsStringAsync();
-            //products
 
             return View();
         }
 
         public ActionResult About()
         {
-            ViewBag.Message = "Your application description page.";
+            ViewBag.Message = "Welcome to GradSchooler!";
 
             return View();
         }
