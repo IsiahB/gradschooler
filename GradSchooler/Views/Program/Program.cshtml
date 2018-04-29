@@ -18,6 +18,12 @@
     <div class="table-responsive">
         <table class="table">
              <tr>
+                <th>Program</th>
+                <th>Institution</th>
+                <th>City</th>
+                <th>State</th>
+             </tr>
+             <tr>
                 <th>
                   @using (Html.BeginForm("Program", "Program", search, FormMethod.Post))
                   {
@@ -42,12 +48,6 @@
                     <input type="text" class="form-control" name="state" placeholder="State" value="">
                   }       
                 </th>        
-              </tr>
-              <tr>
-                <th>Program</th>
-                <th>Institution</th>
-                <th>City</th>
-                <th>State</th>
               </tr>
             @foreach (var item in progs)
             {

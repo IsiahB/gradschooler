@@ -7,10 +7,10 @@ using System.Web.Mvc;
 
 namespace GradSchooler.Controllers
 {
-    public class ProfilerController : Controller
+    public class ProfileController : Controller
     {
         [Authorize] //if you are not authorized, it wont let you to the page
-        public ActionResult Profiler()
+        public ActionResult Profile()
         {
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
 

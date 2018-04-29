@@ -10,5 +10,6 @@ namespace GradSchooler.Models
         public string pEmail { get; set; }
         public string[] deadlines { get; set; } //to store important dates
         public string[] favUnis { get; set; }
+        public string bio { get; set; }
     }
 }
