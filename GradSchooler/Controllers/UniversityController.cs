@@ -26,7 +26,7 @@ namespace GradSchooler.Controllers
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
             List <University> univs = new List<University>();
 
-            univs = db.getUniversities("");
+            univs = db.getUniversities("", "");
             ViewData["unis"] = univs;
 
             return View(); //automatically returns the University View
@@ -38,14 +38,33 @@ namespace GradSchooler.Controllers
         /// </summary>
         [HttpPost]
         public ActionResult University(String keyword){
-            keyword = Request["s"];
+            string searchType = "";
+            if(!String.IsNullOrEmpty(Request["name"])){
+                keyword = Request["name"];
+                searchType = "name";
+            }
+            else if (!String.IsNullOrEmpty(Request["city"]))
+            {
+                keyword = Request["city"];
+                searchType = "city";
+            }
+            else if (!String.IsNullOrEmpty(Request["state"]))
+            {
+                keyword = Request["state"];
+                searchType = "state";
+            }
+            else if (!String.IsNullOrEmpty(Request["url"]))
+            {
+                keyword = Request["url"];
+                searchType = "uniUrl";
+            }
 
             ViewBag.Message = "University Page";
 
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
             List<University> univs = new List<University>();
 
-            univs = db.getUniversities(keyword);
+            univs = db.getUniversities(keyword, searchType);
             ViewData["unis"] = univs;
 
             return View();

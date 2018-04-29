@@ -302,95 +302,15 @@ namespace GradSchooler.DBUtilities
             
         }//end addFavUniversity
 
-        public Boolean addUniversity()
-        {
-            //read the file and return the dictionary
-            Scraper s = new Scraper();
-            Dictionary<String, List<String>> dict = s.UniversitiesByState();
-
-
-            var cmd2 = new MySqlCommand();
-            List<String> sqlList = new List<String>(); //in order to execute multiple sql inserts
-
-            //insert into database
-            String sqlP = "INSERT INTO University VALUES (@name, @fundingtype, @city, @state, @environment, @uniURL, @address)";
-            MySqlCommand cmd = new MySqlCommand(sqlP, conn);
-            string elD = "";
-            string itemD = "";
-            cmd.Parameters.AddWithValue("@name", elD);
-            cmd.Parameters.AddWithValue("@fundingtype", "Private");
-            cmd.Parameters.AddWithValue("@city", "n/a");
-            cmd.Parameters.AddWithValue("@state", itemD);
-            cmd.Parameters.AddWithValue("@environment", "n/a");
-            cmd.Parameters.AddWithValue("@uniURL", "");
-            cmd.Parameters.AddWithValue("@address", "");
-
-            try
-            {
-                if (conn.State != System.Data.ConnectionState.Open)
-                {
-                    conn.Close(); //just incase it is broken
-                    conn.Open(); //open the database connection 
-                }//if
-
-                if (conn != null)
-                {
-                    cmd.Prepare();
-                    foreach (var item in dict)
-                    {
-                        //Debug.Write(item.Key + " " );
-                        foreach (var el in item.Value)
-                        {
-                            //Debug.Write(el + ", ");
-                            if (true)
-                            {
-                                cmd.Parameters[0].Value =  el;
-                                cmd.Parameters[3].Value = item.Key;
-
-                                //put try
-                                //catch, print error message and it will continue
-                                try
-                                {
-                                    cmd.ExecuteNonQuery();
-                                }
-                                catch(MySqlException e)
-                                {
-                                    //catching exception - is there a better way?
-                                    Debug.WriteLine("Problems with sql stuff, this is the problem:  " + e);
-                                }
-                              
-                            }
-                        }
-                        Debug.WriteLine("");
-                    }
-
-                    return true;
-                }
-
-            }
-            catch (MySqlException e)
-            {
-                Debug.WriteLine("Invalid parameters for insertion    : " + e);
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return false;
-        }//end addUniversities
 
         public Boolean UniversityPopulated()
         {
-            if(getUniversities("").Count == 0) { return false; }
+            if(getUniversities("", "").Count == 0) { return false; }
             return true;
-
         }
 
-
-
-
         // - getUniversityList
-        public List<University> getUniversities(String s)
+        public List<University> getUniversities(String keyword, String searchType)
         {
             List<University> unis = new List<University>();
 
@@ -406,14 +326,14 @@ namespace GradSchooler.DBUtilities
                 if(conn != null)
                 {
                     MySqlDataReader reader = null;
-                    if (s == "")
+                    if (keyword == "")
                     {
                         sql = "SELECT name, fundingtype, city, state, environment, uniURL " +
                             "FROM University ";
                     }else{
                         sql = "SELECT name, fundingtype, city, state, environment, uniURL " +
                             "FROM University " +
-                            "WHERE * LIKE '%" + s + "%' ";
+                            "WHERE " + searchType + " LIKE '%" + keyword + "%' ";
                     }
                     MySqlCommand command = new MySqlCommand(sql, conn);
                     using (reader = command.ExecuteReader())

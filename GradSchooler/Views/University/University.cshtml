@@ -12,6 +12,7 @@
     <title>@ViewBag.Title - GradSchooler</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/custom")
 </head>
 <body>
             <div class="table-responsive">          
@@ -29,29 +30,25 @@
                             <th>
                                 @using (Html.BeginForm("University", "University", search, FormMethod.Post))
                                 {
-                                    <input type="text" class="form-control" name="s" placeholder="Search.." value="">
-                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                    <input type="text" class="form-control" name="name" placeholder="University" value="">
                                 }
                             </th>
                             <th>
                                 @using (Html.BeginForm("University", "University", search, FormMethod.Post))
                                 {
-                                    <input type="text" name="s" placeholder="Search.." value="">
-                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                    <input type="text" class="form-control" name="city" placeholder="City" value="">
                                 }
                             </th>
                             <th>
                                 @using (Html.BeginForm("University", "University", search, FormMethod.Post))
                                 {
-                                    <input type="text" name="s" placeholder="Search.." value="">
-                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                    <input type="text" class="form-control" name="state" placeholder="State" value="">
                                 }
                             </th>
                             <th>
                                 @using (Html.BeginForm("University", "University", search, FormMethod.Post))
                                 {
-                                    <input type="text" name="s" placeholder="Search.." value="">
-                                    <button type="submit"><i class="fa fa-search"></i></button>
+                                    <input type="text" class="form-control" name="url" placeholder="Url" value="">
                                 }
                             </th>
                         </tr>
