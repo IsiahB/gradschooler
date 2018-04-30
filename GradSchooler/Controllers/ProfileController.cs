@@ -45,7 +45,6 @@ namespace GradSchooler.Controllers
             db.deleteAccount(userEmail);
             //can you log out of an account you've deleted?
             return RedirectToAction("Index", "Home");
-
         }
     }
 }

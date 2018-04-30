@@ -284,6 +284,7 @@
     <Content Include="Scripts\custom\site.js" />
     <Content Include="Media\background.jpg" />
     <Content Include="Media\books.jpg" />
+    <Content Include="Media\sushii.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
