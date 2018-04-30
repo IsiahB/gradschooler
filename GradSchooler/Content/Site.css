@@ -28,10 +28,13 @@ textarea {
     color: black;
 }
 
-.jumbotron jumbotron-fluid {
+.jumbotron-fluid{
+    background-image: url("../Media/books.jpg");
+    background-position-y: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-color: powderblue;
+    background-color:powderblue;
+    min-height: 400px;
     color: black;
 }
 

@@ -67,6 +67,10 @@ namespace GradSchooler.Controllers
             return View();
         }
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult FavoriteUniversity()
         {
@@ -103,21 +107,33 @@ namespace GradSchooler.Controllers
             return View();
         }//end of post method
 
+        /// <summary>
+        /// Returns the view of the SingleUniversity page in order
+        /// for a user to view the data of one university
+        /// </summary>
+        /// <param name="u"></param>
+        /// <returns></returns>
         public ActionResult SingleUniversity(University u)
         {
             ViewData["uni"] = u;
             return View();
         }
 
+        /// <summary>
+        /// Returns the view of the SingleUniversity page with a form 
+        /// in order for a user to change the data of one university
+        /// </summary>
+        /// <param name="u"></param>
+        /// <param name="s"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult SingleUniversity(University u, string s){
 
             s = "NULL";
-            String curEmail = User.Identity.Name;
+            String curEmail = User.Identity.Name; //the user that is logged in
 
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
             db.addURequest(u, curEmail, s);
-
 
             return RedirectToAction("University", "University");
         }
