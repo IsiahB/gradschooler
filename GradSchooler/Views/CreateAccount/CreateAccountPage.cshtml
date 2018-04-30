@@ -6,6 +6,14 @@
 @{
     ViewBag.Title = "Account Creation Page";
 }
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - GradSchooler</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/custom")
+</head>
 
 @using (Html.BeginForm("CreateAccountPage", "CreateAccount", FormMethod.Post))
 {
@@ -14,32 +22,35 @@
             <div class="card-header"></div>
             <div class="card-body">
                 <div class="form-group">
-                    <label for="username">Email *</label><br/>
+                    <label for="username">Email *</label><br />
                     <input type="text" name="email" value="@Request.Form["email"]" required>
-                    <br/>
+                    <br />
                 </div>
                 <div class="form-group">
                     <label for="password">Password *</label>
                     <input type="text" name="password" value="@Request.Form["password"]" required>
-                    <br/>
+                    <br />
                 </div>
                 <div class="form-group">
-                    <label for="username">First name</label>
-                    <input type="text" name="firstName" value="@Request.Form["firstName"]" placeholder="Jane">
-                    <br/>
+                    <label for="firstname">First name</label>
+                    <input type="text" name="firstName" value="@Request.Form["firstName"]" placeholder="Jane" required>
+                    <br />
                 </div>
                 <div class="form-group">
-                    <label for="username">Last name</label>
-                    <input type="text" name="lastName" value="@Request.Form["lastName"]" placeholder="Doe">
-                    <br/>
+                    <label for="lastname">Last name</label>
+                    <input type="text" name="lastName" value="@Request.Form["lastName"]" placeholder="Doe" required>
+                    <br />
                 </div>
-                <div class="form-group">
-                    <label for="password">Birthday</label>
-                    <input type="text" name="birthday" value="@Request.Form["birthday"]">
-                    <small id="dobHelp" class="form-text text-muted">(YYYY-MM-DD)</small>
+                <div class="input-group date" data-provide="datepicker">
+                    <label for="birthday">Birthday</label>
+                    <input type="text" class="form-control" name="birthday" value="@Request.Form["birthday"]">
+                    <div class="input-group-addon">
+                        <span class="glyphicon glyphicon-th"></span>
+                    </div>
                 </div>
-                <input type="submit" value="Create" class="btn btn-dark btn-block mt-3"/>
-           </div>
+                <small id="dobHelp" class="form-text text-muted">(YYYY-MM-DD)</small>
+                <input type="submit" value="Create" class="btn btn-dark btn-block mt-3" />
+            </div>
         </div>
     </div>
 
