@@ -33,7 +33,7 @@ textarea {
     background-position-y: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-color:powderblue;
+    background-color: transparent;
     min-height: 400px;
     color: black;
 }
