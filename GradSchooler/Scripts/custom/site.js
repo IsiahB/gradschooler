@@ -7,5 +7,3 @@
     }
   });
 });
-
-$('.datepicker').datepicker();

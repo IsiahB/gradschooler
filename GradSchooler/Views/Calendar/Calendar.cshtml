@@ -1,4 +1,10 @@
-﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage" %>
+﻿@using GradSchooler.Controllers;
+@{
+    string u = ViewBag.User;
+    string date = ViewBag.Date;
+    @Scripts.Render("~/bundles/custom") 
+}
+
 <!DOCTYPE html>
 <html>
 <head runat="server">
@@ -8,4 +14,12 @@
 	<div>
         <iframe src="https://calendar.google.com/calendar/b/2/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=oo05b89hcnug8u7hsabrs2u5l0%40group.calendar.google.com&amp;color=%23875509&amp;ctz=America%2FLos_Angeles" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 	</div>
+    <div>
+        <div class="form-group">
+         <label >Begin voorverkoop periode</label>
+         <input type="date" name="eventday" max="3000-12-31" 
+                min="@date" class="form-control">
+        </div>
+          @date
+    </div>
 </body>

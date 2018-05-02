@@ -330,7 +330,7 @@
     <Content Include="Media\books.jpg" />
     <Content Include="Media\sushii.jpg" />
     <None Include="CalendarUtil\client_secrets_id.json" />
-    <Content Include="Views\Calendar\Calendar.aspx" />
+    <Content Include="Views\Calendar\Calendar.cshtml" />
     <Content Include="Views\Shared\_Favicons.cshtml" />
     <Content Include="wwwroot\android-chrome-192x192.png" />
     <Content Include="wwwroot\android-chrome-512x512.png" />
