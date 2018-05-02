@@ -1,16 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.Mvc;
+﻿using System.Web.Mvc;
+using GradSchooler.CalendarUtil;
 
 namespace GradSchooler.Controllers
 {
-    public class AuthCallbackController : Controller
+    public class AuthCallbackController : Google.Apis.Auth.OAuth2.Mvc.Controllers.AuthCallbackController
     {
-        public ActionResult Index()
+        protected override Google.Apis.Auth.OAuth2.Mvc.FlowMetadata FlowData
         {
-            return View ();
+            get { return new GCalFlowMetaData(); }
         }
     }
 }

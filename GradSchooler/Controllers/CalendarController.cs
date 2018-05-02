@@ -8,9 +8,9 @@ namespace GradSchooler.Controllers
 {
     public class CalendarController : Controller
     {
-        public ActionResult Index()
+        public ActionResult Calendar()
         {
-            return View ();
+            return View();
         }
     }
 }
