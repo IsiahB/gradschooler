@@ -1,6 +1,7 @@
 ﻿using GradSchooler.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -69,5 +70,41 @@ namespace GradSchooler.Controllers
 
             return View();
         }
+
+        [HttpPost]
+        public ActionResult FavoriteProgram()
+        {
+            if (ModelState.IsValid)
+            {
+                DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
+
+                String curEmail = User.Identity.Name;//get the email of the person logged in
+
+                //get post data from request object
+                List<String> favProgsData = new List<String>();
+
+                foreach(var key in Request.Form.AllKeys)
+                {
+                    if (key.StartsWith("favProgs"))
+                    {
+                        String s = Convert.ToString(Request.Form[key]);
+                        String[] values = s.Split(',');
+                        foreach(var item in values)
+                        {
+                            db.addFavProgram(curEmail, item); //add favUni to database
+                        }//end foreach
+                    }//end if
+                }//end foreach
+
+
+                return RedirectToAction("Index", "Home");
+            }
+            else
+            {
+                ModelState.AddModelError("","This action cannot be performed");
+            }
+
+            return View();
+        }//end of post method
     }
 }

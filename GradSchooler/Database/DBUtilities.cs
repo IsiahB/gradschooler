@@ -300,7 +300,7 @@ namespace GradSchooler.DBUtilities
             }
             return favUnis;
             
-        }//end addFavUniversity
+        }//end getFavUniversity
 
 
         public Boolean UniversityPopulated()
@@ -436,6 +436,135 @@ namespace GradSchooler.DBUtilities
             }
             return pros;
         }//end getPrograms
+
+        /// <summary>
+        /// Adds a program to the FavPrograms table so that
+        /// the user can view their favorited programs
+        /// </summary>
+        /// <param name="pEmail"></param>
+        /// <param name="program"></param>
+        /// <returns></returns>
+        public Boolean addFavProgram(String pEmail, String program)
+        {
+            //insert into database
+            string sqlP = null;
+
+            try
+            {
+                if (conn.State != System.Data.ConnectionState.Open)
+                {
+                    conn.Close(); //just incase it is broken
+                    conn.Open(); //open the database connection
+                }//if
+
+                if (conn != null)
+                {
+                    sqlP = "INSERT INTO FavPrograms " +
+                    "VALUES ('" + pEmail + "', '" + program + "')";
+
+                    MySqlCommand cmd2 = new MySqlCommand(sqlP, conn);
+
+                    cmd2.ExecuteNonQuery(); //to add the profile
+
+                    return true;
+                }
+            }
+            catch (MySqlException)
+            {
+                Console.Write("Invalid parameters for insertion" + "\n");
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }//end addFavProgram
+
+        public Boolean deleteFavProgram(Profile profile)
+        {
+            //insert into database
+            string sql = null;
+
+            try
+            {
+                if (conn.State != System.Data.ConnectionState.Open)
+                {
+                    conn.Close(); //just incase it is broken
+                    conn.Open(); //open the database connection
+                }//if
+
+                if (conn != null)
+                {
+                    sql = "DELETE FROM FavPrograms " +
+                    "WHERE accountname='" + profile.pEmail + "' AND favprogramname='" + profile.favProgs + "'";
+
+                    MySqlCommand cmd = new MySqlCommand(sql, conn);
+
+                    cmd.ExecuteNonQuery();
+
+                    return true;
+                }
+            }
+            catch (MySqlException)
+            {
+                Console.Write("Invalid parameters for insertion" + "\n");
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return false;
+        }//end addFavUniversity
+
+        public List<Program> getFavPrograms(String email)
+        {
+            //insert into database
+            string sql = null;
+            //create array for faved universities
+            List<Program> favProgs = new List<Program>();
+
+            try
+            {
+                if (conn.State != System.Data.ConnectionState.Open)
+                {
+                    conn.Close(); //just incase it is broken
+                    conn.Open(); //open the database connection
+                }//if
+
+                if (conn != null)
+                {
+                    MySqlDataReader reader = null;
+                    sql = "SELECT favprogramname, city, state, schoolname " +
+                    "FROM FavPrograms, Program " +
+                    "WHERE accountemail='" + email + "' and favprogramname=programname";
+                    MySqlCommand command = new MySqlCommand(sql, conn);
+                    using (reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Program p = new Program
+                            {
+                                programname = (string)reader["favprogramname"],
+                                schoolname = (string)reader["schoolname"],
+                                city = (string)reader["city"],
+                                state = (string)reader["state"]
+                            };
+                            favProgs.Add(p);
+                        }
+                    }
+                }
+            }
+            catch (MySqlException)
+            {
+                Console.Write("Invalid parameters for insertion" + "\n");
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return favProgs;
+
+        }//end getFavPrograms
 
 
 
