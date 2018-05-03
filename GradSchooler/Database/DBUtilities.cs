@@ -610,9 +610,8 @@ namespace GradSchooler.DBUtilities
             return valid;
         }//loginChecker
 
-        public String getAccFirstName(String accEmail)
+        public String getAccName(String accEmail)
         {
-            Debug.WriteLine("passed in accEmail: " + accEmail);
             string sql = null;
             String accFirstName = "";
 
@@ -626,9 +625,9 @@ namespace GradSchooler.DBUtilities
 
                 if (conn != null)
                 {
-                    sql = "SELECT firstName " +
+                    sql = "SELECT CONCAT(firstName, ' ', lastName) " +
                     "FROM Account " + 
-                    "WHERE email='" + accEmail + "'";
+                    "WHERE email='" + accEmail + "' ";
 
                     using (MySqlCommand cmd = new MySqlCommand(sql, conn))
                     {

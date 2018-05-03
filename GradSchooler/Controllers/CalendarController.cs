@@ -16,10 +16,17 @@ namespace GradSchooler.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult AddDeadline(){
+            //db.submitDateRequest(deadline);
+            string deadline = Request["deadline"];
+            //Debug.WriteLine(" the deadline: " + deadline);
+            return RedirectToAction(this.ControllerContext.RouteData.Values["controller"].ToString());
+        }
+
         public string Date(){
             DateTime today = DateTime.Today;
-            //Debug.WriteLine(today.ToString("dd-MM-yyyy"));
-            return today.ToString("dd-MM-yyyy");
+            return today.ToString("yyyy-MM-dd");
 
         }
     }

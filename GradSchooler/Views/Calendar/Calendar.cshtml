@@ -14,12 +14,15 @@
 	<div>
         <iframe src="https://calendar.google.com/calendar/b/2/embed?height=600&amp;wkst=1&amp;bgcolor=%23ffffff&amp;src=oo05b89hcnug8u7hsabrs2u5l0%40group.calendar.google.com&amp;color=%23875509&amp;ctz=America%2FLos_Angeles" style="border-width:0" width="800" height="600" frameborder="0" scrolling="no"></iframe>
 	</div>
+@using (Html.BeginForm("AddDeadline", "Calendar", FormMethod.Post)){
     <div>
         <div class="form-group">
-         <label >Begin voorverkoop periode</label>
-         <input type="date" name="eventday" max="3000-12-31" 
-                min="@date" class="form-control">
+         <label >Have a deadline to report?</label>
+         <form>
+             <input type="date" name="deadline" max='2025-01-01' min='@date' class="form-control">
+             <input type="submit" class="btn btn-primary"> 
+         </form>
         </div>
-          @date
     </div>
+}
 </body>

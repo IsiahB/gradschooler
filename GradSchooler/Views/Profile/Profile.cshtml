@@ -1,50 +1,118 @@
 ﻿@{
     ViewBag.Title = "Profile";
     var favs = ViewBag.favUnis;
+    var fname = ViewBag.fname;
+    var lname = ViewBag.lname;
+    var bio = ViewBag.bio;
+    Scripts.Render("~/bundles/custom");
 }
 
+<head>
 
+</head>
 <body>
-    <h2>Profile</h2>
-
+    <br/>
     <div class="container">
-        <h2>Welcome!</h2>
-        <form>
-            <div class="form-group">
-                <label for="bio">Bio:</label>
-                <textarea class="form-control" rows="5" id="comment"></textarea>
+        <div class="span3 well">
+            <center>
+            <a href="#aboutModal" data-toggle="modal" data-target="#myModal"><img src="/Media/booksico.jpg" name="aboutme" width="140" height="140" class="img-circle"></a>
+            <h3>@fname @lname</h3>
+            <em>click to see saved universities &amp; programs!</em>
+            </center>
+        </div>
+        <!-- Modal -->
+        <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                        <h4 class="font-italic" id="myModalLabel">More About @fname</h4>
+                        </div>
+                    <div class="modal-body">
+                        <center>
+                        <img src="/Media/booksico.jpg" name="aboutme" width="140" height="140" border="0" class="img-circle">
+                        <h3 class="media-heading">@fname @lname</h3>
+                        <span class="font-italic"> @bio </span>
+                            
+                        </center>
+                        <hr>
+                        <center>
+                        <p class="text-left"><strong>Universities: </strong><br></p>
+                        <div class="table-responsive table-hover">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Funding</th>
+                                    <th>City</th>
+                                    <th>State</th>
+                                    <th>Environment</th>
+                                </tr>
+                                @foreach (var item in favs)
+                                {
+                                 <tr>
+                                     <td>@item.name</td>
+                                     <td>@item.fundingtype</td>
+                                     <td>@item.city</td>
+                                     <td>@item.state</td>
+                                     <td>@item.environment</td>
+                                  </tr>
+                                }
+                            </table>
+                        </div>
+
+                        <p class="text-left"><strong>Programs: </strong><br>
+                                    
+                        </p>
+                        <br>
+                        </center>
+                    </div>
+                    <div class="modal-footer">
+                        <center>
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </center>
+                    </div>
+                </div>
             </div>
-        </form>
+        </div>
     </div>
 
-    <table>
-        <tr>
-            <th>University</th>
-            <th>Funding</th>
-            <th>City</th>
-            <th>State</th>
-            <th>Environment</th>
-        </tr>
-        @foreach (var item in favs)
-        {
-            <tr>
-                <td>@item.name</td>
-                <td>@item.fundingtype</td>
-                <td>@item.city</td>
-                <td>@item.state</td>
-                <td>@item.environment</td>
-            </tr>
-        }
-    </table>
-
-
     <p>
-    <a href="@Url.Action("DeleteProfile", "Profile")" class="btn btn-primary btn-lg active" role="button">Delete</a>
+     
     </p>
+
+      <!-- Trigger the modal with a button -->
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal">Delete Account</button>
+
+      <!-- Modal -->
+      <div class="modal fade" id="modal" role="dialog">
+        <div class="modal-dialog">
+        
+          <!-- Modal content-->
+          <div class="modal-content">
+            <div class="modal-header">
+              <h4 class="modal-title">Sorry to see you go!</h4>
+            </div>
+            <div class="modal-body">
+              <p>
+                 @using(Html.BeginForm("DeleteProfile", "Profile", FormMethod.Post)){
+                    <input type="submit" class="btn btn-danger" value="Delete forever">
+
+                 }<br/>
+                 <strong>(This cannot be undone)</strong>
+              </p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">Nevermind!</button>
+            </div>
+          </div>
+          
+        </div>
+      </div>
+     
+
+
+
 </body>
-
-
-
 
 
 

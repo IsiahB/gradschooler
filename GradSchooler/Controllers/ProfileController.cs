@@ -11,6 +11,7 @@ using System.Threading.Tasks;
 using System.Web;
 using System.Web.Mvc;
 using System.Diagnostics.Contracts;
+using System.Diagnostics;
 
 namespace GradSchooler.Controllers
 {
@@ -22,7 +23,7 @@ namespace GradSchooler.Controllers
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
 
             String userEmail = User.Identity.Name;
-            String userName = db.getAccFirstName(userEmail);
+            String name = db.getAccName(userEmail);
             List<University> favUnis = db.getFavUniversities(userEmail);
             var size = favUnis.Count;
 
@@ -40,6 +41,13 @@ namespace GradSchooler.Controllers
             }
             
             ViewData["favUnis"] = favUnis;
+            var fullname = name.Split(' ');
+            string fname = fullname[0];
+            string lname = fullname[1];
+            string bio = "Ya win some ya lose some";
+            ViewBag.fname = fname;
+            ViewBag.lname = lname;
+            ViewBag.bio = bio;
 
             return View();
         }
@@ -49,10 +57,13 @@ namespace GradSchooler.Controllers
         {
             string userEmail = User.Identity.Name;
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
-            db.deleteAccount(userEmail);
-            //can you log out of an account you've deleted?
+            db.deleteAccount(userEmail); //delete account
+            System.Web.Security.FormsAuthentication.SignOut(); //reset auth cookie
+
             return RedirectToAction("Index", "Home");
         }
+
+       
 
         public async Task IndexAsync(CancellationToken cancellationToken)
         {
@@ -66,8 +77,7 @@ namespace GradSchooler.Controllers
                     ApplicationName = "gradschooler"
                 });
 
-                // YOUR CODE SHOULD BE HERE..
-                // SAMPLE CODE:
+                // TODO : Implement Calendar for specific user
                 //var list = await service.CalendarList.ToString();
                 //ViewBag.Message = "FILE COUNT IS: " + list.Items.Count();
                 //return View();

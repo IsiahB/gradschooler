@@ -29,7 +29,7 @@ namespace GradSchooler.Controllers
                 DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
                 if (db.loginChecker(acc.email, acc.password))
                 {
-                    String name = db.getAccFirstName(acc.email);
+                    String name = db.getAccName(acc.email);
 
                     //set the account attribute, firstName, to the user's first name by
                     //quering the database for the name

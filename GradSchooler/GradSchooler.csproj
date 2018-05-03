@@ -342,6 +342,7 @@
     <Content Include="wwwroot\mstile-150x150.png" />
     <Content Include="wwwroot\safari-pinned-tab.svg" />
     <None Include="wwwroot\site.webmanifest" />
+    <Content Include="Media\booksico.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
