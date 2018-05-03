@@ -16,17 +16,24 @@ namespace GradSchooler.Controllers
         /// </summary>
         /// <returns>The university.</returns>
         [HttpGet]
-        public ActionResult University()
+        public ActionResult University(int page = 0)
         {
+            const int pageSize = 15; //number of elements per page
+
             ViewBag.Message = "University Page";
 
             DBUtilities.DBUtilities db = DBUtilities.DBUtilities.Instance;
             List <University> univs = new List<University>();
 
             univs = db.getUniversities("", "");
-            ViewData["unis"] = univs;
+            var count = univs.Count;
+            var data = univs.Skip(page * pageSize).Take(pageSize).ToList();
+            ViewBag.MaxPage = (count / pageSize) - (count % pageSize == 0 ? 1 : 0);
+            ViewBag.Page = page;
 
-            return View(); //automatically returns the University View
+            ViewData["unis"] = data;
+
+            return View(data); //automatically returns the University View
         }//end of get method
 
         /// <summary>
