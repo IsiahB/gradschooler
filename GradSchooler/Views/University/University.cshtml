@@ -55,6 +55,7 @@
                         </tr>
                       </thead>
                 </table>
+
                 @using(Html.BeginForm("FavoriteUniversity", "University", FormMethod.Post, new { name = "FavForm", id = "FavForm"})){
                 <table class="table">
                         @foreach (var item in unis)

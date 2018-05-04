@@ -28,8 +28,8 @@
                 </div>
                 <div class="form-group">
                     <label for="password">Password *</label>
-                    <input type="text" name="password" value="@Request.Form["password"]" required>
-                    <br />
+                    <input type="password" name="password" value="@Request.Form["password"]" required>
+                    <br/>
                 </div>
                 <div class="form-group">
                     <label for="firstname">First name</label>
@@ -42,8 +42,8 @@
                     <br />
                 </div>
                 <div class="input-group date" data-provide="datepicker">
-                    <label for="birthday">Birthday</label>
-                    <input type="text" class="form-control" name="birthday" value="@Request.Form["birthday"]">
+                    <label for="birthday">Birthday</label><br/>
+                    <input type="date" class="form-control" name="birthday" value="@Request.Form["birthday"]">
                     <div class="input-group-addon">
                         <span class="glyphicon glyphicon-th"></span>
                     </div>
