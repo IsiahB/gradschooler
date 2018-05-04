@@ -534,9 +534,9 @@ namespace GradSchooler.DBUtilities
                 if (conn != null)
                 {
                     MySqlDataReader reader = null;
-                    sql = "SELECT favprogramname, city, state, schoolname " +
-                    "FROM FavPrograms, Program " +
-                    "WHERE accountemail='" + email + "' and favprogramname=programname";
+                    sql = "SELECT favprogramname " +
+                    "FROM FavPrograms " +
+                    "WHERE accountemail='" + email + "' ";
                     MySqlCommand command = new MySqlCommand(sql, conn);
                     using (reader = command.ExecuteReader())
                     {
@@ -545,9 +545,6 @@ namespace GradSchooler.DBUtilities
                             Program p = new Program
                             {
                                 programname = (string)reader["favprogramname"],
-                                schoolname = (string)reader["schoolname"],
-                                city = (string)reader["city"],
-                                state = (string)reader["state"]
                             };
                             favProgs.Add(p);
                         }
