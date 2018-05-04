@@ -4,7 +4,6 @@
         this.form.submit();
       }
       return false;
-    }
   });
 });
 

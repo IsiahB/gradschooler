@@ -24,6 +24,7 @@ namespace GradSchooler.Controllers
 
             String userEmail = User.Identity.Name;
             String name = db.getAccName(userEmail);
+            List<String> favProgs = new List<String>();
             List<University> favUnis = db.getFavUniversities(userEmail);
             var size = favUnis.Count;
 
@@ -39,8 +40,9 @@ namespace GradSchooler.Controllers
                 };
                 favUnis.Add(u);
             }
-            
+            favProgs.Add("Mathematics");
             ViewData["favUnis"] = favUnis;
+            ViewData["favProgs"] = favProgs;
             var fullname = name.Split(' ');
             string fname = fullname[0];
             string lname = fullname[1];

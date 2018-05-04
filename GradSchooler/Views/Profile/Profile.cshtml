@@ -1,6 +1,7 @@
 ﻿@{
     ViewBag.Title = "Profile";
-    var favs = ViewBag.favUnis;
+    var favUnis = ViewBag.favUnis;
+    var favProgs = ViewBag.favProgs;
     var fname = ViewBag.fname;
     var lname = ViewBag.lname;
     var bio = ViewBag.bio;
@@ -47,7 +48,7 @@
                                     <th>State</th>
                                     <th>Environment</th>
                                 </tr>
-                                @foreach (var item in favs)
+                                @foreach (var item in favUnis)
                                 {
                                  <tr>
                                      <td>@item.name</td>
@@ -60,10 +61,23 @@
                             </table>
                         </div>
 
-                        <p class="text-left"><strong>Programs: </strong><br>
-                                    
-                        </p>
-                        <br>
+                        <p class="text-left"><strong>Programs: </strong><br></p>
+                        <div class="table-responsive table-hover">
+                            <table class="table table-bordered">
+                                <tr>
+                                    <th>Name</th>
+                                </tr>
+                                @foreach (var item in favProgs)
+                                {
+                                 <tr>
+                                     <td>@item</td>
+                                  </tr>
+                                }
+                            </table>
+                        </div>
+
+                            
+                        <br/>
                         </center>
                     </div>
                     <div class="modal-footer">

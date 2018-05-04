@@ -15,8 +15,6 @@
 
 </head>
 <body>
-@using (Html.BeginForm("FavoriteProgram", "Program", FormMethod.Post))
-{
     <div class="table-responsive">
         <table class="table">
              <tr>
@@ -54,20 +52,25 @@
                   }       
                 </th>        
               </tr>
-            @foreach (var item in progs)
-            {
-                <tr>
-                    @if (Request.IsAuthenticated){<td><input type="checkbox" name="favProgs" value="@item.programname" /></td>}
-                    <td>@item.programname</td>
-                    <td>@item.schoolname</td>
-                    <td>@item.city</td>
-                    <td>@item.state</td>
-                </tr>
-            }
-        </table>
-    </div>
-    if (Request.IsAuthenticated){<input type="submit" class="btn btn-primary" value="Favorite">}
-}
+          </table>
+          @using (Html.BeginForm("FavoriteProgram", "Program", FormMethod.Post))
+          {
+            <table class="table">
+                @foreach (var item in progs)
+                {
+                    <tr>
+                        @if(Request.IsAuthenticated){<td><input type="checkbox" name="favProgs" value="@item.programname" /></td>}
+                        <td width="25%">@item.programname</td>
+                        <td width="25%">@item.schoolname</td>
+                        <td width="25%">@item.city</td>
+                        <td width="25%">@item.state</td>
+                    </tr>
+                }
+            </table>
+            if(Request.IsAuthenticated){<input type="submit" class="btn btn-primary" value="Favorite">}
+           }
+</div>
+
 
 @if (ViewBag.Page > 0)
 {
