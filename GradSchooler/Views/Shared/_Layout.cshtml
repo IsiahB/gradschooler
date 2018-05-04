@@ -20,23 +20,21 @@
       <div class="collapse navbar-collapse justify-content-between" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("University", "University")">Universities</a>
+            <a class="nav-link" href="@Url.Action("University", "University")"><i class="fas fa-graduation-cap"></i> Universities</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="@Url.Action("Program", "Program")">Programs</a>
+            <a class="nav-link" href="@Url.Action("Program", "Program")"><i class="fas fa-paper-plane"></i> Programs</a>
           </li>
         </ul>
         <ul class="navbar-nav ml-auto">
           @if(Request.IsAuthenticated){
             <li>
-               <a class="nav-link" href="@Url.Action("Calendar", "Calendar")">Calendar</a>
+               <a class="nav-link" href="@Url.Action("Calendar", "Calendar")"><i class="fa fa-calendar"></i> Calendar</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Profile", "Profile")"><i class="fas fa-user"></i> Profile</a>
             </li>        
-            <li class="nav-item">
-                <a class="nav-link" href="@Url.Action("Logout", "Login")">Logout</a>
-            </li>
+
           }else{
             <li class="nav-item">
                 <a class="nav-link" href="@Url.Action("Login", "Login")"><i class="fas fa-user"></i>Login</a>

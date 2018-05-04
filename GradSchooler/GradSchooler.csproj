@@ -346,7 +346,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Views\About\" />
     <Folder Include="Scripts\custom\" />
     <Folder Include="Media\" />
     <Folder Include="CalendarUtil\" />

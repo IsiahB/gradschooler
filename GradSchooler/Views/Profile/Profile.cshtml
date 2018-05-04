@@ -81,7 +81,7 @@
     </p>
 
       <!-- Trigger the modal with a button -->
-      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal">Delete Account</button>
+      <button type="button" class="btn btn-info" data-toggle="modal" data-target="#modal">Account Settings</button>
 
       <!-- Modal -->
       <div class="modal fade" id="modal" role="dialog">
@@ -90,14 +90,18 @@
           <!-- Modal content-->
           <div class="modal-content">
             <div class="modal-header">
-              <h4 class="modal-title">Sorry to see you go!</h4>
+              <h4 class="modal-title">Account Settings</h4>
             </div>
             <div class="modal-body">
               <p>
+                  @using(Html.BeginForm("Logout", "Login", FormMethod.Post)){
+                   <input type="submit" class="btn btn-warning" value="Logout">    
+                  }
+                  <strong>Sign out of your account</strong>     
+                 <br/><br/>
                  @using(Html.BeginForm("DeleteProfile", "Profile", FormMethod.Post)){
-                    <input type="submit" class="btn btn-danger" value="Delete forever">
-
-                 }<br/>
+                    <input type="submit" class="btn btn-danger" value="Delete Forever">
+                 }
                  <strong>(This cannot be undone)</strong>
               </p>
             </div>

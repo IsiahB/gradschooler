@@ -15,7 +15,7 @@
     @Scripts.Render("~/bundles/custom")
 </head>
 <body>
-@using (Html.BeginForm("FavoriteUniversity", "University", FormMethod.Post)){
+
             <div class="table-responsive">          
                 <table class="table">
                     <thead>
@@ -54,24 +54,29 @@
                             </th>
                         </tr>
                       </thead>
+                </table>
+                @using(Html.BeginForm("FavoriteUniversity", "University", FormMethod.Post, new { name = "FavForm", id = "FavForm"})){
+                <table class="table">
                         @foreach (var item in unis)
                         {
                             String url = (item.url).ToLower();
-                            <tbody>
+                            <tbody id="unis">
                                 <tr>
-                                    @if(Request.IsAuthenticated){<td><input type="checkbox" name="favUnis" value="@item.name" /></td>}
-                                    <td><a href = "@Url.Action("SingleUniversity", "University", item)">@item.name</a></td>
-                                    <td>@item.city</td>
-                                    <td>@item.state</td>
-                                    <td><a href="http://@url">@url</a></td>
+                                    @if(Request.IsAuthenticated){<td width="40px"><input type="checkbox" name="favUnis" value="@item.name" /></td>}
+                                    <td width="25%"><a href = "@Url.Action("SingleUniversity", "University", item)">@item.name</a></td>
+                                    <td width="25%">@item.city</td>
+                                    <td width="25%">@item.state</td>
+                                    <td width="25%"><a href="http://@url">@url</a></td>
                                 </tr>
                             </tbody>
                         }     
                 </table>
+                if(Request.IsAuthenticated){<input type="submit" class="btn btn-primary" name="Favorite" value="Favorite">}
+             }
              </div>
              <br/>
-             if(Request.IsAuthenticated){<input type="submit" class="btn btn-primary" value="Favorite">}
-}
+       
+             
 
 @if (ViewBag.Page > 0)
 {
