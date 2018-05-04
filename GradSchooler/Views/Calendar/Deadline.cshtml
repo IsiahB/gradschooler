@@ -1,0 +1,48 @@
+﻿@using GradSchooler.Controllers;
+@{
+    string u = ViewBag.User;
+    string date = ViewBag.Date;
+    @Scripts.Render("~/bundles/custom") 
+}
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+        @using (Html.BeginForm("AddDeadline", "Calendar", FormMethod.Post)){
+        <div>
+            <div class="container">
+                <div class="card mx-auto mt-5 w-25">
+                    <div class="card-header">Report a deadline!</div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <form>
+                                <div class="form-group">
+                                    <label for="progname">Program Name</label>
+                                    <input type="text" name="progname" value="@Request.Form[" progname"]" placeholder="" required>
+                                </div><div class="form-group">
+                                    <label for="uniname">University Name</label>
+                                    <input type="text" name="uniname" value="@Request.Form[" uniname"]" placeholder="" required>
+                                </div><div class="form-group">
+                                    <label for="deadline">Deadline</label>
+                                    <input type="date" name="deadline" max='2025-01-01' min='@date' class="form-control">
+                                </div><div class="form-group">
+                                <div class="form-group">
+                                    <label for="lastname">Additional Notes</label><br/>
+                                    <input type="text" name="progname" value="@Request.Form["progname"]" placeholder="" required>
+                                </div>
+                                    <input type="submit" class="btn btn-primary">
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </body>
+</html>

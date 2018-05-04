@@ -15,6 +15,11 @@ namespace GradSchooler.Controllers
             ViewBag.Date = Date();
             return View();
         }
+        public ActionResult Deadline(){
+            ViewBag.User = User.Identity.Name;
+            ViewBag.Date = Date();
+            return View();
+        }
 
         [HttpPost]
         public ActionResult AddDeadline(){

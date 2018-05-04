@@ -342,6 +342,7 @@
     <Content Include="wwwroot\safari-pinned-tab.svg" />
     <None Include="wwwroot\site.webmanifest" />
     <Content Include="Media\booksico.jpg" />
+    <Content Include="Views\Calendar\Deadline.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

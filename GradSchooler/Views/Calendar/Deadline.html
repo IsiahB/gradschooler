@@ -1,0 +1,38 @@
+﻿<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <title></title>
+    </head>
+    <body>
+        @using (Html.BeginForm("AddDeadline", "Calendar", FormMethod.Post)){
+        <div>
+            <div class="container">
+                <div class="card mx-auto mt-5 w-25">
+                    <div class="card-header">Sign up</div>
+                    <div class="card-body">
+                        <div class="form-group">
+                            <label>Have a deadline to report?</label>
+                            <form>
+                                <div class="form-group">
+                                    <label for="lastname">Program Name</label>
+                                    <input type="text" name="progname" value="@Request.Form[" progname"]" placeholder="" required>
+                                </div><div class="form-group">
+                                    <label for="lastname">University Name</label>
+                                    <input type="text" name="uniname" value="@Request.Form[" uniname"]" placeholder="" required>
+                                </div><div class="form-group">
+                                    <label for="lastname">Deadline</label>
+                                    <input type="date" name="deadline" max='2025-01-01' min='@date' class="form-control">
+                                </div><div class="form-group">
+                                    <input type="submit" class="btn btn-primary">
+                                </div>
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        }
+    </body>
+</html>
